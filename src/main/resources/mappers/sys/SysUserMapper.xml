@@ -7,7 +7,7 @@
 			   id="sysUserDeptVo">
 		<association property="sysDept"
 					 column="deptId"
-			         select="com.tedu.cgb.team.sys.dao.SysDeptMapper.findRecordById">
+			         select="com.tedu.cgb.team.sys.dao.SysDeptDAO.findRecordById">
 		</association>
 	</resultMap>
 	
