@@ -34,19 +34,19 @@ public class SpringShiroConfiguration {
 		// 注入SecurityManager
 		factoryBean.setSecurityManager(securityManager);
 		// 设置登录url
-		factoryBean.setLoginUrl("/doLoginUI");
+		factoryBean.setLoginUrl("/sys/doLoginUI");
 		
 		// 设置过滤器规则
 		Map<String, String> map = 
 				new LinkedHashMap<>();
 		// anon  表示允许不认证匿名访问
 		// authc 表示需要认证访问
-		map.put("/bower_components/**", "anon");
-		map.put("/build/**", "anon");
-		map.put("/dist/**", "anon");
-		map.put("/plugins/**", "anon");
-		map.put("/user/doLogin","anon");
-		map.put("/doLogout","logout");
+		map.put("/sys/bower_components/**", "anon");
+		map.put("/sys/build/**", "anon");
+		map.put("/sys/dist/**", "anon");
+		map.put("/sys/plugins/**", "anon");
+		map.put("/sys/user/doLogin","anon");
+		map.put("/sys/doLogout","logout");
 		map.put("/**", "user");
 		factoryBean.setFilterChainDefinitionMap(map);
 		return factoryBean;

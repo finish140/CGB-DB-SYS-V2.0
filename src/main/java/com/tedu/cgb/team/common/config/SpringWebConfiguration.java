@@ -15,7 +15,7 @@ public class SpringWebConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new TimeAccessInterceptor())
-				.addPathPatterns("/user/doLogin");
+				.addPathPatterns("/sys/user/doLogin");
 	}
 	
 }

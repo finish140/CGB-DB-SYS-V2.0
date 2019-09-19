@@ -15,6 +15,7 @@ public class PageController {
 	
 	@RequestMapping("{module}/{moduleUI}")
 	public String doModuleUI(@PathVariable String moduleUI) {
+		System.out.println("doModuleUI");
 		return "sys/" + moduleUI;
 	}
 	
@@ -25,6 +26,7 @@ public class PageController {
 	
 	@RequestMapping("doLoginUI")
 	public String doLoginUI() {
+		System.out.println("doLoginUI");
 		return "login";
 	}
 	
