@@ -26,10 +26,8 @@
 						    <th><input type="checkbox" id="checkAll">全选</th>
 							<th>用户名</th>
 							<th>操作</th>
-							<th>请求方法</th>
-							<th>请求参数</th>
 							<th>IP</th>
-							<th>执行时长</th>
+							<th>操作时间</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -74,12 +72,12 @@
 	function doDeleteObjects() {
 		var ids = doGetCheckedIds();
 			if(ids.length == 0) {
-				alert("Make sure at least one of the records is selected.");
+				alert("至少选择一个");
 				return;
 			}
 		var url = "log/doDeleteByIds";
 		var params = {"ids" : ids.toString()};
-		if(!confirm('Are you confirm deleting?')) return;
+		if(!confirm('确定要删除吗')) return;
 		$.post(url, params, function(result) {
 			if(result.state == 1) {
 				alert(result.message);
@@ -118,10 +116,8 @@
 		var tds = "<td><input type='checkbox' class='cBox' name='cItem' value='" + data.id + "'></td>"
 			+ "<td>" +  data.username   + "</td>"
 			+ "<td>" +  data.operation  + "</td>"
-			+ "<td>" +  data.method     + "</td>"
-			+ "<td>" +  data.params     + "</td>"
 			+ "<td>" +  data.ip         + "</td>"
-			+ "<td>" +  data.time       + "</td>";	   
+			+ "<td>" +  new Date(data.creationDate).toLocaleString()+ "</td>";	   
 		return tds;
 	}
 	

@@ -250,9 +250,21 @@ desired effect
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active">
+        <li class="treeview">
         <a href="#"><i class="fa fa-link"></i> 
-        <span>商品管理</span></a></li>        
+        <span>商城管理</span>
+        	<span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+       	 <ul class="treeview-menu">
+            <li><a id="load-product-id" style="cursor: pointer"> 商品管理</a></li>
+            <li><a id="load-order-id" style="cursor: pointer"> 订单管理</a></li>
+          </ul>
+        </li>        
+        
+        
+        
         
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> 
@@ -262,9 +274,6 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a id="load-dept-id" style="cursor: pointer">部门管理</a></li>
-            <li><a id="load-menu-id" style="cursor: pointer">菜单管理</a></li>
-            <li><a id="load-role-id" style="cursor: pointer">角色管理</a></li>
             <li><a id="load-user-id" style="cursor: pointer">用户管理</a></li>
             <li><a id="load-log-id" style="cursor: pointer"> 日志管理</a></li>
             <li><a id="load-pwd-id" style="cursor: pointer"> 修改密码</a></li>
@@ -415,9 +424,6 @@ desired effect
 <script type="text/javascript">
 	$(function() {
 		doLoadUI("#load-log-id", "log/log_list");
-		doLoadUI("#load-menu-id","menu/menu_list");
-		doLoadUI("#load-dept-id","dept/dept_list");
-		doLoadUI("#load-role-id","role/role_list");
 		doLoadUI("#load-user-id","user/user_list");
 		doLoadUI("#load-pwd-id","user/pwd_edit");
 	})

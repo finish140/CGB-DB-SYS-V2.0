@@ -9,7 +9,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.tedu.cgb.team.common.exception.IdArgumentException;
 import com.tedu.cgb.team.common.vo.JsonResult;
 
 /**
@@ -36,10 +35,6 @@ public class GlobalExceptionHandler {
 		if (e.getMessage() != null || !StringUtils.isEmpty(e.getMessage())) {
 			result.setMessage(e.getMessage());
 			return result;
-		}
-		
-		if (e.getClass() == IdArgumentException.class) {
-			result.setMessage("id参数不合法，请刷新页面重试");
 		}else {
 			result.setMessage("系统维护中");
 		}

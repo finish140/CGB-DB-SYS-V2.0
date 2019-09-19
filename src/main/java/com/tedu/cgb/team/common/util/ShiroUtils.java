@@ -2,18 +2,18 @@ package com.tedu.cgb.team.common.util;
 
 import org.apache.shiro.SecurityUtils;
 
-import com.tedu.cgb.team.sys.entity.SysUser;
+import com.tedu.cgb.team.common.entity.User;
 
 public class ShiroUtils {
 	
 	public static String getCurrentUsername() {
-		String username = ((SysUser) SecurityUtils.getSubject()
+		String username = ((User) SecurityUtils.getSubject()
 				.getPrincipal())
 				.getUsername();
 		return username;
 	}
 	
-	public static SysUser getCurrentUser() {
-		return (SysUser) SecurityUtils.getSubject().getPrincipal();
+	public static User getCurrentUser() {
+		return (User) SecurityUtils.getSubject().getPrincipal();
 	}
 }
