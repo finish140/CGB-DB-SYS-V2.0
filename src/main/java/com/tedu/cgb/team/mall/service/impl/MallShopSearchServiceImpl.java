@@ -1,4 +1,4 @@
-package com.tedu.cgb.team.mall.service;
+package com.tedu.cgb.team.mall.service.impl;
 
 import java.util.List;
 
