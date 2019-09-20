@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <!-- <link rel="stylesheet" href="css/model.css"> -->
+  <link rel="stylesheet" href="css/all.css">
+
+  
+  <title>体育</title>
+  <style>
+    .menu-1 {
+      background-color: #555;
+      opacity: 0.9;
+    }
+
+    .menu-2 {
+      background-color: #C0FF3E;
+      opacity: 0.9;
+
+    }
+
+    .login li a:hover {
+      color: #007bff !important;
+      background-color: #f8f9fa!important;
+      text-decoration: none;
+    }
+
+    .fa-basketball-ball {
+      color: coral;
+      font-size: 40px;
+    }
+
+    .navbar {
+      opacity: 1;
+    }
+
+    .fa-thumbs-up {
+      font-size: 2rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: transform 0.5s;
+    }
+
+    .like {
+      color: red;
+    }
+
+    .fa-thumbs-up:active {
+      color: red;
+      transform: scale(2, 2);
+      transition: transform 0.1s;
+    }
+
+    .shop {
+      border-radius: 0;
+      transform: .2;
+    }
+
+    .shop:hover,
+    .shop:focus {
+      background-color: #CD5555;
+    }
+
+    .card {
+      border-radius: 0;
+    }
+
+    .shop a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .card:hover {
+      transform: scale(1.05, 1.05);
+      transition: transform 0.1s;
+    }
+
+    .act {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .fa-home,.fa-map-marker-alt{
+      color: #707070;
+    }  
+    .login-tb{
+      border-radius:50%;
+      font-size: 30px;
+      
+    }
+    /* .login-zh{
+      display: none;
+    } */
+    .login-ewm{
+      display: none;
+      }
+    .login-at{
+      border-bottom: solid #dc3545;;
+      cursor: pointer;
+    }
+    .login-de{
+      border-bottom: solid #9E9E9E;color:#9E9E9E;
+      cursor: pointer;
+    }
+
+    .contact .form-group .form-control{
+      border-radius: 0;
+    }
+    .fa-phone,.name,
+    .fa-map-marker-alt,
+    .fa-envelope{
+      font-size: 18px;
+    }
+    .f-con{
+      font-size: 10px;
+    } 
+    .footer-social li{
+      width: 35px;
+      height: 35px;
+      background: #9E9E9E;
+      font-size: 15px;
+      border-radius: 50%;
+      padding-top: 10px;
+      color: #fff;   
+    }
+    .footer-social li:hover{
+      color: #fff;  
+      background: orange;
+      cursor: pointer;
+    }
+  
+    </style>
+      <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=bMgcz5BHxOd6KKbUuFHxosnXATsz9lrj"></script>
+      <script src="js/jquery-3.4.0.js"></script>
+      <script type="text/javascript">
+        // 百度地图API功能
+
+        var point = new BMap.Point(116.331398,39.897445);
+      
+        function myFun(result){
+          var cityName = result.name;
+          $("#city").html(cityName)
+        }
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFun);
+      </script>
+</head>
+
+<body data-spy="scroll" data-target="#mylist" data-offset="100">
+  <!-- 以下为模态框内容 -->
+  <!-- 登录 -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document" style="max-width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;">
+        <div class="text-center mt-3 login-at"
+          style="width: 200px;height: 40px;margin-left: 30px;">账号登录</div>
+        <div class=" text-center mt-3 login-de" style="width: 200px;height: 40px;">二维码登录
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 10px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- 账号登录 -->
+      <div class="modal-body login-zh" >
+        <div style="max-width: 400px;margin-left: 30px;">
+          <form action="denglu.php" method="post">
+            <div class="form-group" >
+              <input type="text" class="form-control" id="num" placeholder="请输入账号">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="pwd" placeholder="请输入密码">
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 ">
+                <div class="form-check">
+                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                  <label for="remember" class="form-check-label">记住账号</label>
+                </div>
+              </div>
+              <div class="col-md-6 text-right mt-1" style="font-size: 10px">
+                <span>忘记密码</span>
+                <span>|</span>
+                <span>去注册</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal">登录</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- 二维码登录 -->
+      <div class="modal-body login-ewm" >
+          <div style="display: flex;justify-content:center;">
+          <img src="image/ewm.png" style="max-width: 200px;max-height:200px;" >
+          </div>
+        </div>
+      <div class="modal-footer " style="justify-content:left;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 pt-3 d-none  d-md-inline">       
+              其他登录方式：&nbsp;        
+            </div>
+            <div class="col-12 col-md-8">  
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微信登录">
+              <i class="fab fa-weixin" style="color: #28a745;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="QQ登录"><i
+                class="fab fa-qq" style="color: #007bff;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微博登录"><i
+                class="fab fa-weibo" style="color: #dc3545;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="支付宝登录"><i
+                class="fab fa-alipay" style="color: #007bff;"></i></button>
+            </div>     
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- 删除 -->
+  <div class="modal fade" id="delete1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">删除记录</h5>
+            <button class="close" type="button" data-dismiss="modal">
+              <span>&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>您真的需要删除<span id="course"></span>吗？</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">取消</button>
+            <button class="btn btn-danger delete-1" type="button" id="delete" data-dismiss="modal">确认删除</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- 以上为模态框内容 -->
+
+ 
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-light bg-light navbar-expand-md sticky-top" style="margin-top: 10px;height: 30px;">
+    <div class="container">
+        <ul class="navbar-nav mt-1">
+            <li style="list-style-type: none">
+                <i class="fas fa-home"></i>
+                <a class="navbar-brand" style="color: #707070;font-size: 12px;" href="index.html">首页</a>
+            </li>
+            <li style="list-style-type: none">
+                <i class="fas fa-map-marker-alt"></i>
+                <a class="navbar-brand" id="city" style="color: #707070;font-size: 12px;" href="map.html"></a>
+            </li>
+          </ul>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav" style="height:20;">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="mynav">
+          <ul class="navbar-nav  ml-auto login">
+            <li style="list-style-type: none;font-size: 12px;">
+              <a href="#" data-toggle="modal" data-target="#exampleModal">登陆</a>
+              <span style="color: #007bff ">|</span>
+              <a href="register.html">注册</a>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+<div class="container mt-3">
+    <!-- 图标和搜索框 -->
+    <div class="row">
+        <div class="col-md-4 mt-3">
+            <a href="index-2.html"><i class="fas fa-basketball-ball"><span >&nbsp;YH体育</span></i></a> 
+        </div>
+        <div class="col-md-5">
+
+        </div>
+        <div class="col-md-3">
+            <form action="" method="post" class="ml-md" style="margin-top: 25px;">
+                <div class="input-group input-group-sm">
+                    <input type="text" name="" id="" class="form-control">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">搜索</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- 警告框 -->
+    <div class="row mt-3">
+        <div class="alert alert-warning  col-12" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            您还没有登录！登录后购物车的商品将保存到您账号中
+            <a href="#" style="text-decoration:none;cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
+                <span class="badge badge-danger" style="font-size: 15px;">立即登录</span>
+            </a>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <!-- 购物车列表 -->
+    <div class="row ">
+      <table class="table  table-hover">
+        <thead>
+          <tr>
+            <th scope="col" style="width: 30px;border-bottom: solid 2px red;text-align: center" colspan="2">全部商品</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr style="background: #BEBEBE;text-align: center;">
+            <th scope="row" style="width: 10px;"><input id="all" type="checkbox" id="defaultCheck1" onclick="chk()"></th>
+            <td style="width: 30px;">全选</td>
+            <td style="width: 500px;">商品</td>
+            <td>单价</td>
+            <td>数量</td>
+            <td>小计</td>
+            <td>操作</td>
+          </tr>
+          <tr style="height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+               data-toggle="modal" data-target="#delete1" data-cid="001" ">
+               删除
+              </button>
+            </td>
+          </tr>
+          <tr style=" height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-096</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+              data-toggle="modal" data-target="#delete1" data-cid="002" ">
+              删除
+             </button></td>
+          </tr>
+          <tr style="height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-097</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+              data-toggle="modal" data-target="#delete1" data-cid="003" ">
+              删除
+             </button></td>
+          </tr>
+          <tr style="height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-098</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+              data-toggle="modal" data-target="#delete1" data-cid="004" ">
+              删除
+             </button></td>
+          </tr>
+          <tr style="height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-099</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+              data-toggle="modal" data-target="#delete1" data-cid="005" ">
+              删除
+             </button></td>
+          </tr>
+          <tr style="height: 100px;text-align: center;line-height:70px;">
+            <th scope="row"><input id="myall" name="myall" type="checkbox" id="defaultCheck1"></th>
+            <td colspan=""><img src="image/s_bs1.png" alt="" style="width: 70px;height:70px;"></td>
+            <td>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-0100</td>
+            <td style="color:peru;">￥199</td>
+            <td>1</td>
+            <td>￥199</td>
+            <td><button type="submit" class="btn btn-danger shop "
+              data-toggle="modal" data-target="#delete1" data-cid="006" ">
+              删除
+             </button></td>
+          </tr>
+          <tr  style="height: 100px;text-align: center;line-height:70px;background: #BEBEBE">
+            <th scope="row"></th>
+           
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-ri" colspan="2">共1194元</td>
+            <td><button type="submit" class="btn btn-danger shop " style="width: 100%;height:100%;"><a href="jiesuan.html"
+                  style="color:#fff;text-decoration: none;">去结算</a></button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+  <!-- 页脚 -->
+  <footer class="footer mt-5 bg-light"  role="contentinfo">
+      <div class="container py-5">
+        <div class="row">
+            <div class="col-4">
+                <h5>CONTACT&nbsp;<span style="color: orange">INFO</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <i class="fas fa-phone"></i><span class="ml-3 name" style="color: orange">Telefone</span>
+                    <p class="mt-2 f-con">(000) 123 456 78- (000) 123 4567 89</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i><span class="ml-3 name" style="color: orange">Address</span>
+                    <p class="mt-2 f-con">2046 Blue Spruce Lane Laurel Canada</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope"></i><span class="ml-3 name" style="color: orange">E mail</span>
+                    <p class="mt-2 f-con">rest@gmail.com - rest@mail.ru</p>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>LATEST<span style="color: orange"> BLOG POSTS</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <p class="name" style="color: orange">Nov 9-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                  <li>
+                    <p class="name" style="color: orange">Sep 8-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>PHOTO <span style="color: orange">STREAM</span></h5>
+                <p class="mt-2 f-con">No content</p>
+                <h6>Follow <span style="color: orange">US</span></h6>
+                <ul class="list-unstyled footer-link d-flex footer-social text-center mt-3">
+                    <li class="fab fa-twitter"></li>
+                    <li class="fab fa-facebook-f ml-3"></li>
+                    <li class="fab fa-dribbble ml-3 "></li>
+                    <li class="fab fa-behance ml-3"></li>
+                  </ul>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+        $('.modal-header').on('click','.login-de', function () {
+          $('.login-at').addClass("login-de")
+          $('.login-de').removeClass("login-at")
+          $(this).removeClass("login-de")
+          $(this).addClass("login-at")
+          
+          var a="账号登录";
+          var b="二维码登录";
+          if($(this).text()==a){
+            $('.login-ewm').hide();
+            $('.login-zh').show();
+          }else{
+            $('.login-zh').hide();
+            $('.login-ewm').show();
+          }
+        })
+      });
+
+    $(document).ready(function () {
+        $('#delete1').on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget)
+          var cname = button.closest('tr').children('td').eq(1).text();
+          var cid = button.data('cid')
+
+          $(this).find('#course').text(cname)
+          $(this).find('#delete').data('cid', cid)
+        })
+
+        $('#delete').on('click', function(){
+          var cid = $(this).data('cid')
+          console.log('此处发送AJAX请求到服务端删除记录，cid为：', cid)
+          $('#mymodal').modal('hide')
+        })
+    })
+
+
+    function chk() {
+        var all = document.getElementById("all");
+        var myall = document.getElementsByName("myall");
+        if (all.checked == true) { 
+          if (myall.length) {
+            for (var i = 0; i < myall.length; i++) {
+              myall[i].checked = true;
+            }
+          }
+          myall.chcked = true;
+        } else { 
+          if (myall.length) {
+            for (var i = 0; i < myall.length; i++) {
+              myall[i].checked = false;
+            }
+
+          }
+        }
+
+      }  
+    
+ 
+  
+  </script>
+</body>
+
+</html>

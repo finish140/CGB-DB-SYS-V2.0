@@ -39,15 +39,18 @@
 			targetProject="src/main/java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
-		
+		<!--  
 		<table schema="" domainObjectName="CartProduct" tableName="cart_products" />
 		<table schema="" domainObjectName="Cart" tableName="carts" />
 		<table schema="" domainObjectName="Category" tableName="categorys" />
 		<table schema="" domainObjectName="Comment" tableName="comments" />
 		<table schema="" domainObjectName="Logger" tableName="logger" />
 		<table schema="" domainObjectName="Order" tableName="orders" />
-		<table schema="" domainObjectName="Product" tableName="products" />
-		<table schema="" domainObjectName="User" tableName="user" />
+		<table schema="" domainObjectName="User" tableName="users" />
+		-->
+		<table domainObjectName="Product" tableName="products" >
+   			 <columnOverride column="context" jdbcType="VARCHAR" property="context" /> 
+		</table>
 		<!-- 自定义字段java类型使用 <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer"> 
 			<property name="useActualColumnNames" value="true" /> <generatedKey column="ID" 
 			sqlStatement="DB2" identity="true" /> <columnOverride column="DATE_FIELD" 

@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <!-- <link rel="stylesheet" href="css/model.css"> -->
+  <link rel="stylesheet" href="css/all.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <title>欢乐淘商城 </title>
+  <style>
+      .menu-1 {
+      background-color: #B1191A;
+      margin-top: 4px;
+      border-radius: 0;
+      border: none;
+      min-width: 10px;
+    }
+
+    .menu-2 {
+      background-color: #C0FF3E;
+      opacity: 0.9;
+
+    }
+
+    .login li a:hover {
+      color: #C0FF3E !important;
+      background-color: #B1191A !important;
+    }
+
+    .fa-basketball-ball {
+      color: coral;
+      font-size: 40px;
+    }
+    .fa-thumbs-up{
+      cursor: pointer;
+    }
+
+    .navbar {
+      opacity: 1;
+    }
+
+
+    .shop {
+      border-radius: 0;
+      transform: .2;
+    }
+
+
+    .breadcrumb {
+      padding: 8px 15px;
+      margin-bottom: 20px;
+      list-style: none;
+      background-color: #fff;
+      border-radius: 4px;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+    }
+    #b11,#b12,
+    #b13,#b14,
+    #b15,#b16 {
+      border: 2px #fff solid;
+    }
+
+    #b11:hover,
+    #b12:hover,
+    #b13:hover,
+    #b14:hover,
+    #b15:hover,
+    #b16:hover {
+      border: 2px #000 solid;
+    }
+
+    .s-item,.s-item2,.s-item4,.s-item6{
+      border: solid #CFCFCF 2px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+
+    .s-item0,.s-item1,.s-item3,.s-item5,.s-item7 {
+      
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      cursor: pointer;
+      border: solid #F60 2px;
+      background:url(image/on.png) no-repeat right bottom;
+    }
+
+    .other {
+      background-color: #FF0000;
+      color: #fff;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 15px;
+      cursor: pointer;
+      
+    }
+
+    .other-none {
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .other-none:hover {
+      color: #FF0000;
+    }
+
+    td,
+    tr,
+    th {
+      border: 1px solid transparent !important;
+      font-size: 8px;
+    }
+
+    .pinglun {
+      color: #778899;
+      height: 30px;
+      margin-top: 10px;
+      margin-left: 1rem;
+      border: 1px solid #778899;
+      font-size: 10px;
+      line-height: 30px;
+      cursor: pointer;
+    }
+
+    .pinglun:hover {
+      border: 1px solid #000;
+      color: #000;
+    }
+
+    .fa-star,.fa-star-half-alt {
+      color: #FF7F24;
+    }
+    .login-tb{
+      border-radius:50%;
+      font-size: 30px;
+      
+    }
+    /* .login-zh{
+      display: none;
+    } */
+    .login-ewm{
+      display: none;
+      }
+    .login-at{
+      border-bottom: solid #dc3545;;
+      cursor: pointer;
+    }
+    .login-de{
+      border-bottom: solid #9E9E9E;color:#9E9E9E;
+      cursor: pointer;
+    }
+    .media img{
+    width: 3rem;
+    height: 3rem;
+    }
+    .media .media img{
+     width: 2rem;
+     height: 2rem;
+    }
+    
+    .contact .form-group .form-control{
+      border-radius: 0;
+    }
+    .fa-phone,.name,
+    .fa-map-marker-alt,
+    .fa-envelope{
+      font-size: 18px;
+    }
+    .f-con{
+      font-size: 10px;
+    } 
+    .footer-social li{
+      width: 35px;
+      height: 35px;
+      background: #9E9E9E;
+      font-size: 15px;
+      border-radius: 50%;
+      padding-top: 10px;
+      color: #fff;   
+    }
+    .footer-social li:hover{
+      color: #fff;  
+      background: orange;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- 以下为模态框内容 -->
+  <!-- 登录 -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document" style="max-width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;">
+        <div class="text-center mt-3 login-at"
+          style="width: 200px;height: 40px;margin-left: 30px;">账号登录</div>
+        <div class=" text-center mt-3 login-de" style="width: 200px;height: 40px;">二维码登录
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 10px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- 账号登录 -->
+      <div class="modal-body login-zh" >
+        <div style="max-width: 400px;margin-left: 30px;">
+          <form action="denglu.php" method="post">
+            <div class="form-group" >
+              <input type="text" class="form-control" id="num" placeholder="请输入账号">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="pwd" placeholder="请输入密码">
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 ">
+                <div class="form-check">
+                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                  <label for="remember" class="form-check-label">记住账号</label>
+                </div>
+              </div>
+              <div class="col-md-6 text-right mt-1" style="font-size: 10px">
+                <span>忘记密码</span>
+                <span>|</span>
+                <span>去注册</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal">登录</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- 二维码登录 -->
+      <div class="modal-body login-ewm" >
+          <div style="display: flex;justify-content:center;">
+          <img src="image/ewm.png" style="max-width: 200px;max-height:200px;boerd" >
+          </div>
+        </div>
+      <div class="modal-footer " style="justify-content:left;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 pt-3 d-none  d-md-inline">       
+              其他登录方式：&nbsp;        
+            </div>
+            <div class="col-12 col-md-8">  
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微信登录">
+              <i class="fab fa-weixin" style="color: #28a745;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="QQ登录"><i
+                class="fab fa-qq" style="color: #007bff;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微博登录"><i
+                class="fab fa-weibo" style="color: #dc3545;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="支付宝登录"><i
+                class="fab fa-alipay" style="color: #007bff;"></i></button>
+            </div>     
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- 以上为模态框内容 -->
+
+  <div class="container">
+      <div class="row">
+        <div class="co mt-3">
+            <a href="index-2.html"><img src="image/logo.jpg" alt="" style="width:270px;height:60px;"></a> 
+        </div>
+      </div>
+    </div>
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-dark navbar-expand-md out-nav sticky-top" style="margin-top: 10px;height: 50px;">
+    <div class="container">
+      <a class="navbar-brand o-brand" href="index.html">欢乐淘商城</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="mynav" style="background-color: #B1191A">
+        <ul class="navbar-nav o-n">
+          <li class="nav-item">
+            <a href="#" class="nav-link">服装城</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">美妆馆</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">美食</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">全球购</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">闪购</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">团购</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">金融</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">智能</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav i-n ml-auto login">
+          <li style="list-style-type: none">
+            <a href="#" data-toggle="modal" data-target="#exampleModal">登陆</a>
+            <span style="color: #fff">|</span>
+            <a href="register.html">注册</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">商品</a></li>
+        <li class="breadcrumb-item active" aria-current="page">订单</li>
+      </ol>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-xl-6">
+        <img src="image/s_bs.jpg" id="b1" style="width: 400px;height: 400px;">
+        <img src="image/s_bs2.png" id="b2" style="width: 400px;height: 400px;display: none">
+        <img src="image/s_bs3.png" id="b3" style="width: 400px;height: 400px;display: none">
+        <img src="image/s_bs4.png" id="b4" style="width: 400px;height: 400px;display: none">
+        <img src="image/s_bs1.png" id="b5" style="width: 400px;height: 400px;display: none">
+        <img src="image/s_bs2.png" id="b6" style="width: 400px;height: 400px;display: none">
+        <div style="margin-top: 5px">
+          <img src="image/s_bs.jpg" id="b11" style="width: 60px;height: 60px;">
+          <img src="image/s_bs2.png" id="b12" style="margin-left: 4px;width: 60px;height: 60px;">
+          <img src="image/s_bs3.png" id="b13" style="margin-left: 4px;width: 60px;height: 60px;">
+          <img src="image/s_bs4.png" id="b14" style="margin-left: 4px;width: 60px;height: 60px;">
+          <img src="image/s_bs1.png" id="b15" style="margin-left: 4px;width: 60px;height: 60px;">
+          <img src="image/s_bs2.png" id="b16" style="margin-left: 4px;width: 60px;height: 60px;">
+        </div>
+      </div>
+      <div class="col-12 col-xl-6">
+        <h4 style="text-align:justify;color: #555">斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</h4>
+        <hr style="height:5x;color: #555" />
+        <form action="" method="post">
+          <!--配送-->
+          <div class="form-group row">
+            <label for="num" class="col-md-2 col-form-label">配送至</label>
+            <div class="col-md-10">
+              <input type="text" name="name" id="name" class="" value="广州大学华软软件学院">
+            </div>
+          </div>
+          <hr style="height:5x;color: #555"/>
+          <!--颜色-->
+            <div class="form-group row ">
+              <label for="pwd" class="col-md-2 col-form-label">颜色</label>
+              <div class="col-md-2 col-3">
+                <div class="s-item">
+                  <p>白色</p>
+                </div>
+              </div>
+              <div class="col-md-2 col-3">
+                <div class="s-item">
+                  <p>黄色</p>
+                </div>
+              </div>
+              <div class="col-md-2 col-3">
+                <div class="s-item">
+                  <p>红色</p>
+                </div>
+              </div>
+              <div class="col-md-2 col-3">
+                <div class="s-item">
+                  <p>黑色</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 类型-->
+            <div class="form-group row sz">
+              <label for="pwd" class="col-md-2 col-form-label">类型</label>
+              <div class="col-4 col-md-4">
+                <div class="s-item2">
+                  <p>耐磨加打气筒</p>
+                </div>
+              </div>
+              <div class="col-4 col-md-4">
+                <div class="s-item2">
+                  <p>耐磨加打气筒+球针</p>
+                </div>
+              </div>
+  
+          
+            </div>
+            <div class="form-group row sz">
+              <label for="pwd" class="col-md-2 col-form-label">数量</label>
+              <div class="col-2">
+                <div class="s-item0">
+                  <p>1</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="form-group row sz ">
+              <label for="pwd" class="col-md-2 col-form-label">白条</label>
+              <div class="col-5 col-md-4">
+                <div class="s-item4">
+                  <p>不分期</p>
+                </div>
+              </div>
+              <div class="col-5  col-md-4">
+                <div class="s-item4">
+                  <p>￥50元起×3期</p>
+                </div>
+              </div>
+              <div class="col-5  col-md-4 offset-md-2">
+                <div class="s-item4">
+                  <p>￥40元起×6期</p>
+                </div>
+              </div>
+              <div class="col-5  col-md-4">
+                <div class="s-item4">
+                  <p>￥30元起×9期</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row sz">
+              <label for="pwd" class="col-md-2 col-form-label">保障</label>
+              <div class="col-6 col-md-4">
+                <div class="s-item6">
+                  <p>爱心回收&nbsp;￥30</p>
+                </div>
+              </div>
+              <div class="col-6 col-md-4">
+                <div class="s-item6">
+                  <p>意外补贴&nbsp;￥30</p>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-10 offset-md-2 ">
+                <span style="font-size: 30px;" >￥199 </span>
+                <button type="submit" class="btn btn-danger shop ml-3"><a href="shop_gwc.html"
+                    style="color:#fff;text-decoration: none;">购买</a></button>
+                <button type="submit" class="btn btn-danger shop">
+                  <i class="fas fa-shopping-cart"></i>&nbsp;加入购物车</button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="container" style="margin-top: 2rem;">
+    <hr style="height:5x;" />
+    <div class="row">
+      <div class="col-md-3 d-none d-md-inline-block">
+        <div style="height: 40px;background: #EED5D2;">
+          <h6 class="pl-2 py-2" style="font-weight: bold;font-size: 15px;">华软商店</h6>
+        </div>
+        <div style="border:solid #EED5D2 1px;">
+          <ul class="list-unstyled px-2 " style="font-size: 10px;">
+            <li class="mt-1">
+              店铺星级 
+              <span class="d-inline-block  border border-0  border-primary rounded-pill px-2 ml-2" href="" style="background-color: #CFCFCF;padding-top: 0.05rem;padding-bottom: 0.1rem;">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+              </span>
+            </li>
+            <li class="mt-1" style="color: #555">商品评价 &emsp;<span style="color: #28a745">8.25 高</span></li>
+            <li class="mt-1" style="color: #555">商品履约 &emsp;<span style="color: #28a745">8.25 高</span></li>
+            <li class="mt-1" style="color: #555">售后服务 &emsp;<span style="color: #28a745">8.25 高</span></li>
+            <li><hr></li>
+            <li class="d-flex justify-content-between">
+              <button type="button" class="border-0 btn-link py-2 px-4" style="text-decoration: none;color: #000"><i class="fas fa-home" style="color: #dc3545"></i>&nbsp;进店逛逛</button>
+              <button type="button" class="border-0 btn-link py-2 px-4" style="text-decoration: none;color: #000"><i class="fas fa-star" style="color: #dc3545"></i>&nbsp;关注店铺</button>
+            </li>
+          </ul>
+        </div>
+  
+        <div style="height: 40px;background: #EED5D2;margin-top: 1rem;"></div>
+        <div style="height: 100px;border:solid #EED5D2 1px;"></div>
+  
+        <div style="height: 40px;background: #EED5D2;margin-top: 1rem;"></div>
+        <div style="height: 100px;border:solid #EED5D2 1px;"></div>
+  
+        <div style="height: 40px;background: #EED5D2;margin-top: 1rem;"></div>
+        <div style="height: 100px;border:solid #EED5D2 1px;"></div>
+  
+        <div style="height: 40px;background: #EED5D2;margin-top: 1rem;"></div>
+        <div style="height: 100px;border:solid #EED5D2 1px"></div>
+  
+      </div>
+      <div class="col-md-9 col-12">
+        <div class="container">
+          <div class="row dh" style="background:#EED5D2;border-bottom: solid #FF0000 2px;">
+            <div class="col-3 col-md-2 other" id="s1">商品介绍</div>
+            <div class="col-3 col-md-2 other-none" id="s2">商品规格</div>
+            <div class="col-3 col-md-2 other-none" id="s3">用户评论</div>
+            <div class="col-3 col-md-2 other-none" id="s4">服务售后</div>
+          </div>
+          <div class="row">
+            <!-- 商品介绍 -->
+            <div class="container" id="s11">
+              <table class="table table-sm" style="margin-left: -1rem">
+                <tbody>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>品牌： 斯伯丁（SPALDING）</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>商品名称：斯伯丁74-221</td>
+                    <td>商品编号：1060746</td>
+                    <td>商品毛重：0.62kg</td>
+                    <td>商品产地：福建漳州</td>
+                  </tr>
+                  <tr>
+                    <td>货号：74-221/74-604Y</td>
+                    <td>类别：通用</td>
+                    <td>材质：PU</td>
+                    <td>规格：7号/标准</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="margin-left: -12px;margin-top: 3rem;">
+                <img class="img-fluid" src="image/shop1.png"  style="width: 820px;"></br>
+                <img class="img-fluid" src="image/shop2.png"  style="width: 820px;"></br>
+                <img class="img-fluid" src="image/shop3.png"  style="width: 820px;"></br>
+                <img class="img-fluid" src="image/shop4.png"  style="width: 820px;"></br>
+              </div>
+            </div>
+            <!-- 商品详情 -->
+            <div class="container" id="s12" style="display: none;">
+              <table class="table table-sm" style="margin-left: -1rem;">
+                <tbody>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h4>品牌： 斯伯丁（SPALDING）</h4>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>商品编号：1060746</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>商品毛重：0.62kg</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>商品产地：福建漳州</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>商品名称：斯伯丁74-221</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>货号：74-221/74-604Y</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>类别：通用</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>材质：PU</h5>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <h5>规格：7号/标准</h5>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- 用户评论 -->
+            <div class="container" id="s13" style="display: none;">
+              <div class="row">
+                <div class="col-12 bg-light" style="height: 40px;margin-top: 1rem;">
+                  <h5 style="line-height: 38px;font-family: 黑体;font-size: 14px; font-weight:bold">商品评价</h5>
+                </div>
+                <div class="col-4 col-md-2 text-center" style="padding: 20px;">
+                  <span>好评度</span>
+                  <span style="font-size: 20px;color: #FF7F24;">99%</span>
+                </div>
+                <div class="col-8 col-md-10 text-center" >
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">质量好(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">柔软舒适(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">耐磨(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">弹性十足(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">极其好用(99+)</div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">非常好用(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">没有异味(99+)</div>
+                      <div class="col-md-2 col-sm-5 col-8 pinglun">不易变形(99+)</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 bg-light" style="height: 40px;margin-top: 1rem;">
+                  <h5 style="line-height: 38px;font-family: 黑体;font-size: 14px;color: coral;">全部评价</h5>
+                </div>
+                <div class="col-12 mt-2">
+                  <ul style="margin-left:-50px ">
+                    <li class="media  mt-2" style="border-bottom: 1px #aaaaaa solid;">
+                      <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                      </a>
+  
+                      <div class="media-body">
+                        <h6>用户0000000000</h6>
+                        <p><i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </p>
+                        <p>很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用</p>
+                        <h6>2019-6-13
+                          <div class="float-right">
+                            <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                            <span><i class="zan far fa-thumbs-up"></i></span>
+                            <span>799</span>
+                          </div>
+                        </h6>
+                        <div class="media mt-3" style="border-top: 1px #aaaaaa solid;">
+                          <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                          </a>
+                          <div class="media-body mt-2">
+                            <h6>用户111111&nbsp;<span style="color: #007bff">回复&nbsp;</span>用户0000000000</h6>
+                            <p>真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗</p>
+                            <h6>2019-6-13
+                              <div class="float-right">
+                                <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                                <span><i class="zan far fa-thumbs-up"></i></span>
+                                <span>30</span>
+                              </div>
+                            </h6>
+                          </div>
+                        </div>
+                        <div class=" media mt-3" style="border-top: 1px #aaaaaa solid;">
+                            <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                            </a>
+                            <div class="media-body mt-2">
+                              <h6>用户111111&nbsp;<span style="color: #007bff">回复&nbsp;</span>用户0000000000</h6>
+                              <p>真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗，真的吗</p>
+                              <h6>2019-6-13
+                                <div class="float-right">
+                                  <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                                  <span><i class="zan far fa-thumbs-up"></i></span>
+                                  <span>20</span>
+                                </div>
+                              </h6>
+                            </div>
+                          </div>
+                      </div>
+                    </li>
+                    <li class="media  mt-2" style="border-bottom: 1px #aaaaaa solid;">
+                      <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                      </a>
+                      <div class="media-body">
+                        <h6>用户0000000000</h6>
+                        <p><i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </p>
+                        <p>很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用</p>
+                        <h6>2019-6-13
+                          <div class="float-right">
+                            <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                            <span><i class="zan far fa-thumbs-up"></i></span>
+                            <span>999</span>
+                          </div>
+                        </h6>
+                      </div>
+                    </li>
+                    <li class="media  mt-2" style="border-bottom: 1px #aaaaaa solid;">
+                      <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                      </a>
+                      <div class="media-body">
+                        <h6>用户0000000000</h6>
+                        <p><i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </p>
+                        <p>很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用</p>
+                        <h6>2019-6-13
+                          <div class="float-right">
+                            <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                            <span><i class="zan far fa-thumbs-up"></i></span>
+                            <span>555</span>
+                          </div>
+                        </h6>
+                      </div>
+                    </li>
+                    <li class="media  mt-2" style="border-bottom: 1px #aaaaaa solid;">
+                      <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                      </a>
+                      <div class="media-body">
+                        <h6>用户0000000000</h6>
+                        <p><i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </p>
+                        <p>很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用</p>
+                        <h6>2019-6-13
+                          <div class="float-right">
+                            <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                            <span><i class="zan far fa-thumbs-up"></i></span>
+                            <span>555</span>
+                          </div>
+                        </h6>
+                      </div>
+                    </li>
+                    <li class="media  mt-2" style="border-bottom: 1px #aaaaaa solid;">
+                      <a href=""><img class="rounded-circle mr-3 mt-2" src="image/timg.jpg" alt="">
+                      </a>
+                      <div class="media-body">
+                        <h6>用户0000000000</h6>
+                        <p><i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="far fa-star"></i>
+                        </p>
+                        <p>很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用，很实用</p>
+                        <h6>2019-6-13
+                          <div class="float-right">
+                            <span><a href="#" style="text-decoration: none">评论</a>&nbsp;</span>
+                            <span><i class="zan far fa-thumbs-up"></i></span>
+                            <span>555</span>
+                          </div>
+                        </h6>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+  <!-- 页脚 -->
+  <footer class="footer mt-5 bg-light"  role="contentinfo">
+      <div class="container py-5">
+        <div class="row">
+            <div class="col-4">
+                <h5>CONTACT&nbsp;<span style="color: orange">INFO</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <i class="fas fa-phone"></i><span class="ml-3 name" style="color: orange">Telefone</span>
+                    <p class="mt-2 f-con">(000) 123 456 78- (000) 123 4567 89</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i><span class="ml-3 name" style="color: orange">Address</span>
+                    <p class="mt-2 f-con">2046 Blue Spruce Lane Laurel Canada</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope"></i><span class="ml-3 name" style="color: orange">E mail</span>
+                    <p class="mt-2 f-con">rest@gmail.com - rest@mail.ru</p>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>LATEST<span style="color: orange"> BLOG POSTS</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <p class="name" style="color: orange">Nov 9-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                  <li>
+                    <p class="name" style="color: orange">Sep 8-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>PHOTO <span style="color: orange">STREAM</span></h5>
+                <p class="mt-2 f-con">No content</p>
+                <h6>Follow <span style="color: orange">US</span></h6>
+                <ul class="list-unstyled footer-link d-flex footer-social text-center mt-3">
+                    <li class="fab fa-twitter"></li>
+                    <li class="fab fa-facebook-f ml-3"></li>
+                    <li class="fab fa-dribbble ml-3 "></li>
+                    <li class="fab fa-behance ml-3"></li>
+                  </ul>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+
+  <script src="js/jquery-3.4.0.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+   
+    $(document).ready(function () {
+      $("#b11").hover(function () {
+        $("#b2,#b3,#b4,#b5,#b6").hide();       
+        $("#b1").show();
+      });
+      $("#b12").hover(function () {
+        $("#b1,#b3,#b4,#b5,#b6").hide(); 
+        $("#b2").show();
+      });
+      $("#b13").hover(function () {
+        $("#b2,#b1,#b4,#b5,#b6").hide(); 
+        $("#b3").show();
+      });
+      $("#b14").hover(function () {
+        $("#b2,#b3,#b1,#b5,#b6").hide(); 
+        $("#b4").show();
+      });
+      $("#b15").hover(function () {
+        $("#b2,#b3,#b4,#b1,#b6").hide(); 
+        $("#b5").show();
+      });
+      $("#b16").hover(function () {
+        $("#b2,#b3,#b4,#b5,#b1").hide(); 
+        $("#b6").show();
+      });
+    });
+    $(document).ready(function () {
+      $('.s-item').on('click', function () {
+        $('.s-item1').addClass("s-item")
+        $('.s-item1').removeClass("s-item1")
+        $(this).removeClass("s-item")
+        $(this).addClass("s-item1")
+      })
+      $('.s-item2').on('click', function () {
+        $('.s-item3').addClass("s-item2")
+        $('.s-item3').removeClass("s-item3")
+        $(this).removeClass("s-item2")
+        $(this).addClass("s-item3")
+      })   
+      $('.s-item4').on('click', function () {
+        $('.s-item5').addClass("s-item4")
+        $('.s-item5').removeClass("s-item5")
+        $(this).removeClass("s-item4")
+        $(this).addClass("s-item5")
+      }) 
+      $('.s-item6').on('click', function () {
+        $('.s-item7').addClass("s-item6")
+        $('.s-item7').removeClass("s-item7")
+        $(this).removeClass("s-item6")
+        $(this).addClass("s-item7")
+      })
+    })
+    
+
+    $(document).ready(function () {
+      $('.dh').on('click', '.other-none', function () {
+        $('.other').addClass("other-none")
+        $('.other').removeClass("other")
+        $(this).removeClass("other-none")
+        $(this).addClass("other")
+      })
+      $("#s1").on('click', function () {
+        $("#s12").hide();
+        $("#s13").hide();
+        $("#s11").show();
+      });
+      $("#s2").on('click', function () {
+        $("#s11").hide();
+        $("#s13").hide();
+        $("#s12").show();
+      });
+      $("#s3").on('click', function () {
+        $("#s11").hide();
+        $("#s12").hide();
+        $("#s13").show();
+      });
+    })
+
+    $(document).ready(function () {
+      $('.modal-header').on('click','.login-de', function () {
+        $('.login-at').addClass("login-de")
+        $('.login-de').removeClass("login-at")
+        $(this).removeClass("login-de")
+        $(this).addClass("login-at")
+        
+        var a="账号登录";
+        var b="二维码登录";
+        if($(this).text()==a){
+          $('.login-ewm').hide();
+          $('.login-zh').show();
+        }else{
+          $('.login-zh').hide();
+          $('.login-ewm').show();
+        }
+      })
+    });
+    $(document).ready(function () {
+        $('.zan').on('click', function () {
+          var a = $(this).parent().next().text()
+          if ($(this).attr("class").indexOf("far") != -1) {
+            $(this).removeClass("far")
+            $(this).addClass("fas")
+            $(this).parent().next().text(function () {
+              a++;
+              return a;
+            })
+          } else if ($(this).attr("class").indexOf("fas") != -1) {
+            $(this).removeClass("fas") 
+            $(this).addClass("far")
+            $(this).parent().next().text(function () {
+              a--;
+              return a;
+            })
+          }
+        })
+      });
+
+  </script>
+
+</body>
+
+</html>

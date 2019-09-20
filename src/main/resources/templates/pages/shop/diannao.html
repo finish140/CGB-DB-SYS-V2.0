@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>电商商城全特效实现</title>
+	<link rel="stylesheet" href="ziyuan/css/reset.css">
+	<link rel="stylesheet" href="ziyuan/css/index.css">
+	<link rel="stylesheet" href="ziyuan/css/all.css">
+	<link rel="stylesheet" href="ziyuan/css/iconfont.css">
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script src="ziyuan/js/jquery.easing.min.js"></script>
+	<style>
+		.result{
+			width:1216px;height: 20px;/* border:1px solid red; */min-width: 1210px;margin:0 auto;position: relative;margin-top: 1rem;
+		}
+		.fenge{
+			width:1216px;height: 3px;/* border:1px solid red; */min-width: 1210px;margin:0 auto;position: relative;
+		}
+		.fenye{
+			width:1216px;height:30px;/* border:1px solid red; */min-width: 1210px;margin:0 auto;position: relative;
+		}
+		.min2{
+			width:1216px;height: 2800px;/* border:1px solid red; */min-width: 1210px;margin:0 auto;position: relative;
+		}
+		#goods-list{
+			width: 100%;height: 100%;list-style: none;margin: 0;
+		}
+		#goods-list>li{
+			width:240px;height:450px;  float: left;margin-top: 1rem;margin-left: 2px;
+		}
+		#goods-list>li>.item-bg{
+			width: 100%;height: 100%;margin: 0;border: 1px solid #fff;
+		}	
+		#goods-list>li>.item-bg:hover{
+			box-shadow:0px 2px 5px #aaaaaa;
+		}	
+		#goods-list>li>.item-bg>.product-box{
+			width: 90%;height: 93%;padding: 5%;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info{
+			height: 210px;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-price{
+			font-size: 25px;color:orangered;font-weight: bold;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.title-selling-point{
+			margin-top: 1rem;height: 50px;overflow: hidden;line-height: 25px;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-decs{
+			margin-top: 1rem;color: rgb(111, 105, 105);
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-assess{
+			margin-top: 1rem;
+		}
+		#assess{
+			color:orange;font-size: 15px;font-weight: bold;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-opt{
+			margin-top: 1rem;width: 100%;height: 32px
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-opt>ul{
+			margin-top: 1rem;width: 100%;height: 100%;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-opt>ul>li{
+			width: 106px;float: left;height: 30px;border: 1px solid rgb(189, 182, 182);cursor: pointer;line-height: 30px;text-align: center;
+		}
+		#goods-list>li>.item-bg>.product-box>.res-info>.res-opt>ul>li:hover{
+			background: #FFF6E5;color: #FF6600;
+		}
+		.fenye>.pages{
+			width: 800px;margin:0 auto;position: relative;
+		}
+		.fenye>.pages>li{
+			width: 100px;height: 30px;margin: 0;padding: 0;float: left;text-align: center;background: #ddd7d7;line-height: 30px;border:1px solid #fff;cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="jd-denglu">
+		<div class="dingbu">
+			<div class="yzbj">
+				运至：
+				<span class="sss">北京&nbsp;</span>
+				<div class="eee"><img class="yinc" src="ziyuan/img/16.png">
+
+				</div>
+				<div id="asd">
+					<ul class="chengshi">
+						<li style=""><a class="yangshi" href="###">北京</a></li>
+						<li class="ddd"><a href="###">上海</a></li>
+						<li class="ddd"><a href="###">天津</a></li>
+						<li class="ddd"><a href="###">重庆</a></li>
+						<li class="ddd"><a href="###">河北</a></li>
+						<li class="ddd"><a href="###">山西</a></li>
+						<li class="ddd"><a href="###">河南</a></li>
+						<li class="ddd"><a href="###">辽宁</a></li>
+						<li class="ddd"><a href="###">吉林</a></li>
+						<li class="ddd"><a href="###">黑龙江</a></li>
+						<li class="ddd"><a href="###">内蒙古</a></li>
+						<li class="ddd"><a href="###">江苏</a></li>
+						<li class="ddd"><a href="###">山东</a></li>
+						<li class="ddd"><a href="###">安徽</a></li>
+						<li class="ddd"><a href="###">浙江</a></li>
+						<li class="ddd"><a href="###">福建</a></li>
+						<li class="ddd"><a href="###">湖北</a></li>
+						<li class="ddd"><a href="###">湖南</a></li>
+						<li class="ddd"><a href="###">广东</a></li>
+						<li class="ddd"><a href="###">广西</a></li>
+						<li class="ddd"><a href="###">江西</a></li>
+						<li class="ddd"><a href="###">四川</a></li>
+						<li class="ddd"><a href="###">海南</a></li>
+						<li class="ddd"><a href="###">贵州</a></li>
+						<li class="ddd"><a href="###">云南</a></li>
+						<li class="ddd"><a href="###">西藏</a></li>
+						<li class="ddd"><a href="###">陕西</a></li>
+						<li class="ddd"><a href="###">甘肃</a></li>
+						<li class="ddd"><a href="###">青海</a></li>
+						<li class="ddd"><a href="###">宁夏</a></li>
+						<li class="ddd"><a href="###">新疆</a></li>
+						<li class="ddd"><a href="###">台湾</a></li>
+						<li class="ddd"><a href="###">香港</a></li>
+						<li class="ddd"><a href="###">澳门</a></li>
+						<li class="ddd"><a href="###">钓鱼岛</a></li>
+						<li class="ddd"><a href="###">钓鱼岛</a></li>
+						<li class="ddd"><a href="###">海外</a></li>
+					</ul><em></em>
+				</div>
+			</div>
+			<ul class="yfd">
+				<li><a href="">你好,请登录</a></li>
+				<li><a href="">免费注册</a></li>
+				<li style="color:#ccc;">|</li>
+				<li><a href="">我的订单</a></li>
+				<li style="color:#ccc;">|</li>
+				<li id="kkk"><a href="">我的电商&nbsp;<img style="width:16px;height:14px;" id="" src="ziyuan/img/1.png"></a>
+					<div id="wdjd">
+						<em></em>
+						<div class="diyi">
+							<div class="wd">
+								<img src="ziyuan/img/16.jpg"></div>
+							<div class="jd">
+								<span><a href="###">你好,请登录</a></span>
+								<span><a href="###">优惠券 | 消息</a></span>
+							</div>
+						</div>
+						<div class="dier">
+							<div class="wen">
+								<span><a href="###">待处理订单</a></span>
+								<span><a href="###">咨询回复</a></span>
+								<span><a href="###">降价商品</a></span>
+								<span><a href="###">返修退换货</a></span>
+							</div>
+							<div class="zi">
+								<span><a href="###">我的关注</a></span>
+								<span><a href="###">我的京豆</a></span>
+								<span><a href="###">我的理财</a></span>
+								<span><a href="###">我的白条</a></span>
+							</div>
+						</div>
+				</li>
+				<li style="color:#ccc;">|</li>
+				<li><a href="">会员俱乐部</a></li>
+				<li style="color:#ccc;">|</li>
+				<li><a href="">企业频道</a></li>
+				<li style="color:#ccc;">|</li>
+
+				<li id="iii"><img style="width:10px;height:14px;" src="ziyuan/img/3.png"><a href="">&nbsp;手机电商</a><img
+						style="width:16px;height:14px;float: " src="ziyuan/img/4.png">
+					<div id="sjjd">
+						<img src="ziyuan/img/30.png">
+						<em></em>
+					</div>
+
+
+				</li>
+				<li style="color:#ccc;">|</li>
+				<li id="ppp"><a href="">关注电商&nbsp;</a><img style="width:16px;height:14px;" src="ziyuan/img/5.png">
+					<div id="gzjd">
+						<img src="ziyuan/img/32.jpg">
+						<em></em>
+					</div>
+
+				</li>
+				<li style="color:#ccc;">|</li>
+				<li id="ddd"><a href="">客户服务&nbsp;</a><img style="width:16px;height:14px;" src="ziyuan/img/6.png">
+					<div id="khfw">
+						<em></em>
+						<div class="magen">
+							<span>帮助中心</span>
+							<span>售后服务</span>
+							<spam>在线客服</spam>
+							<span>意见建议</span>
+							<span>客服邮箱</span>
+						</div>
+					</div>
+
+				</li>
+				<li style="color:#ccc;">|</li>
+				<li id="www"><a href="">网站导航&nbsp;</a><img style="width:16px;height:14px;" src="ziyuan/img/7.png">
+					<div id="wzdh">
+						<em></em>
+						<dl class="tszt">
+							<dt
+								style="font-size:14px;font-weight:700;margin-bottom:6px;color:#666;margin-left: 17px;margin-top: 10px">
+								特色主题</dt>
+							<dd id="mg">
+								<div class="tim"><a href="">品牌街</a></div>
+								<div class="tim"><a href="">天天低价</a></div>
+								<div class="tim"><a href="">好东西</a></div>
+								<div class="tim"><a href="">电商预售</a></div>
+								<div class="tim"><a href="">金融精选</a></div>
+								<div class="tim"><a href="">电商首发</a></div>
+								<div class="tim"><a href="">今日团购</a></div>
+								<div class="tim"><a href="">优惠券</a></div>
+								<div class="tim"><a href="">闪购</a></div>
+								<div class="tim"><a href="">电商会员</a></div>
+								<div class="tim"><a href="">电商京选</a></div>
+								<div class="tim"><a href="">定期选</a></div>
+								<div class="tim"><a href="">装机大师</a></div>
+								<div class="tim"><a href="">搭配购</a></div>
+								<div class="tim"><a href="">电商使用</a></div>
+								<div class="tim"><a href="">礼品购</a></div>
+								<div class="tim"><a href="">智能馆</a></div>
+								<div class="tim"><a href="">玩逼格</a></div>
+							</dd>
+						</dl>
+						<dl id="hypd">
+							<dt
+								style="font-size:14px;font-weight:700;margin-bottom:6px;color:#666;margin-left: 17px;margin-top: -4px">
+								行业频道</dt>
+							<dd id="hg">
+								<div class="tim"><a href="">服装城</a></div>
+								<div class="tim"><a href="">家用电器</a></div>
+								<div class="tim"><a href="">电脑办公</a></div>
+								<div class="tim"><a href="">手机</a></div>
+								<div class="tim"><a href="">美妆馆</a></div>
+								<div class="tim"><a href="">食品</a></div>
+								<div class="tim"><a href="">数码</a></div>
+								<div class="tim"><a href="">母婴</a></div>
+								<div class="tim"><a href="">家装城</a></div>
+								<div class="tim"><a href="">运动户外</a></div>
+								<div class="tim"><a href="">整车</a></div>
+								<div class="tim"><a href="">图书</a></div>
+							</dd>
+						</dl>
+						<dl id="shfw">
+							<dt
+								style="font-size:14px;font-weight:700;margin-bottom:6px;color:#666;margin-left: 17px;margin-top: -4px">
+								生活服务</dt>
+							<dd id="hg">
+								<div class="tim"><a href="">电商众筹</a></div>
+								<div class="tim"><a href="">白条</a></div>
+								<div class="tim"><a href="">电商钱包</a></div>
+								<div class="tim"><a href="">电商小金库</div>
+								<div class="tim"><a href="">理财</a></div>
+								<div class="tim"><a href="">话费</a></div>
+								<div class="tim"><a href="">旅行</a></div>
+								<div class="tim"><a href="">彩票</a></div>
+								<div class="tim"><a href="">游戏</a></div>
+								<div class="tim"><a href="">机票</a></div>
+								<div class="tim"><a href="">电影票</a></div>
+								<div class="tim"><a href="">水电煤</a></div>
+								<div class="tim"><a href="">电商到家</a></div>
+							</dd>
+						</dl>
+						<dl id="gdjx">
+							<dt
+								style="font-size:14px;font-weight:700;margin-bottom:6px;color:#666;margin-left: 17px;margin-top: -4px">
+								更多精选</dt>
+							<dd id="kg">
+								<div class="tim"><a href="">电商社区</a></div>
+								<div class="tim"><a href="">电商通信</a></div>
+								<div class="tim"><a href="">在线读书</a></div>
+								<div class="tim"><a href="">电商E书</div>
+								<div class="tim"><a href="">智能社区</a></div>
+								<div class="tim"><a href="">游戏社区</a></div>
+								<div class="tim"><a href="">京友邦</a></div>
+								<div class="tim"><a href="">卖家入驻</a></div>
+								<div class="tim"><a href="">企业采购</a></div>
+								<div class="tim"><a href="">服务市场</a></div>
+								<div class="tim"><a href="">乡村招募</a></div>
+								<div class="tim"><a href="">校园加盟</a></div>
+								<div class="tim"><a href="">办公生活馆</a></div>
+								<div class="tim"><a href="">知识产权维权</a></div>
+								<div class="tim"><a href="">English site</a></div>
+							</dd>
+						</dl>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="jd-erbuf">
+		<div class="jd-erbuf2">
+			<div id="logo-1">
+				<img src="ziyuan/image/logo.jpg">
+			</div>
+			<div class="form">
+				<input class="kz" type="text" value="">
+				<input type="button" class="ss" value="搜索">
+				<div class="biaoqian">
+					<span><a style="color:#c81623">感恩母爱</a></span>
+					<span><a href="">下单有礼</a></span>
+					<span><a href="">小家电</a></span>
+					<span><a href="">丝芙兰</a></span>
+					<span><a href="">感恩母亲</a></span>
+					<span><a href="">手机99起</a></span>
+					<span><a href="">女性必读</a></span>
+					<span><a href="">199减50</a></span>
+					<span><a href="">机票5.7</a></span>
+				</div>
+			</div>
+			<div class="gouwuche">
+				<img class="cileft" src="ziyuan/img/10.png">
+				<span><a href="">我的购物车</a></span>
+				<a href=""><img class="jt" src="ziyuan/img/11.png"></a><em></em>
+				<div class="erlei">
+					<img src="ziyuan/img/12.png">
+					<span
+						style="color:#ccc;width:206px;height:14px;font-size: 13px;position: absolute;left: 116px;top: 31px;">购物车还没有东西哦,赶紧选购吧！</span>
+				</div>
+			</div>
+		</div>
+		<div class="sanlei">
+			<div class="zxkd">
+				<div class="qbfl">
+					<a href="">全部商品分类</a>
+				</div>
+
+				<div class="sldh">
+					<ul id="uile">
+						<li><a href="">服装城</a></li>
+						<li><a href="">美妆馆</a></li>
+						<li><a href="">美食</a></li>
+						<li><a href="">全球购</a></li>
+						<li><a href="">闪购</a></li>
+						<li><a href="">团购</a></li>
+						<li><a href="">夺宝岛</a></li>
+						<li><a href="">金融</a></li>
+						<li><a href="">智能</a></li>
+					</ul>
+				</div>
+				<div class="zhijian">
+					<a href=""><img src="ziyuan/img/15.jpg"></a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="result">
+		全部商品 > <a href="">电脑</a>
+	</div>
+	<div class="fenge">
+		<hr style="color:#ccc;">
+	</div>
+	<div class="shop-list" id="todays">
+		<div class="min2">
+		
+		</div>
+	</div>
+	<div class="fenye"></div>
+	<div class="y">
+		<div id="footer-2014">
+			<div class="links">
+				<a>关于我们</a>
+				|
+				<a>联系我们</a>
+				|
+				<a>商家入驻</a>
+				|
+				<a>营销中心</a>
+				|
+				<a>手机电商</a>
+				|
+				<a>友情链接</a>
+				|
+				<a>销售联盟</a>
+				|
+				<a>电商社区</a>
+				|
+				<a>电商公益</a>
+				|
+				<a>English Site</a>
+				|
+				<a>Contact Us</a>
+
+			</div>
+			<div class="copyright">
+				北京市公安局朝阳分局备案编号110105014669&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+				<a>
+					互联网药品信息服务资格证编号(京)-经营性-2014-0008
+				</a>
+				| 新出发京零 字第大120007号
+				<br>
+				<a>
+					音像制品经营许可证苏宿批005号
+				</a>
+				| 出版物经营许可证编号新出发(苏)批字第N-012号 | 互联网出版许可证编号新出网证(京)字150号
+				<br>
+				<a>
+					网络文化经营许可证京网文[2014]2148-348号
+				</a>
+				违法和不良信息举报电话：4006561155 Copyright © 2004-2015 电商JD.com 版权所有
+				<br>
+				电商旗下网站：
+				<a>360TOP</a>
+				&nbsp;&nbsp;
+				<a>拍拍网</a>
+				&nbsp;&nbsp;
+				<a>网银在线</a>
+			</div>
+			<div class="authentication">
+				<a>
+					<img src="ziyuan/img2/l1.png">
+				</a>
+				<a>
+					<img src="ziyuan/img2/l2.png">
+				</a>
+				<a>
+					<img src="ziyuan/img2/l3.png">
+				</a>
+				<a>
+					<img src="ziyuan/img2/l4.png">
+				</a>
+				<a>
+					<img src="ziyuan/img2/l5.png">
+				</a>
+				<a>
+					<img src="ziyuan/img2/p1.jpg">
+				</a>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+
+
+</body>
+<script src="ziyuan/js/popper.min.js"></script>
+<script src="ziyuan/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+		//选择城市
+		var jddenglu = document.getElementById('jd-denglu');
+	var yzbj = jddenglu.getElementsByTagName('div')[1];
+	var ssss = jddenglu.getElementsByClassName('sss')[0];
+	var asd = document.getElementById('asd');
+	var chengshi = asd.getElementsByClassName('chengshi')[1];
+	var as = asd.getElementsByTagName('a');
+	var imgs = jddenglu.getElementsByTagName('img')[0];
+	var imgs1 = jddenglu.getElementsByTagName('img')[1];
+
+	/*alert(as.length)*/
+
+	yzbj.onmouseover = function () {
+		asd.style.display = 'block';
+		/*	imgs.style.display='none';
+			imgs1.style.display='block';*/
+	}
+
+	yzbj.onmouseout = function () {
+		asd.style.display = 'none'
+		/*imgs.style.display='block';
+		imgs1.style.display='none';*/
+	}
+
+
+	for (var i = 0; i < as.length; i++) {
+		as[i].onclick = function () {
+			asd.style.display = 'none';
+			for (var i = 0; i < as.length; i++) {
+				if (as[i] == this) {
+					ssss.innerHTML = as[i].innerHTML;
+					as[i].className = 'yanshi';
+					as[i].style.background = '#c81623'
+					as[i].style.color = 'white'
+				} else {
+					as[i].className = '';
+					as[i].style.background = ''
+					as[i].style.color = ''
+
+				}
+			}
+		}
+	}
+
+	
+
+</script>
+<script>
+$(function(){
+	$(".min2").load("search")
+	$(".fenye").load("searchPage")
+})
+
+</script>
+</html>

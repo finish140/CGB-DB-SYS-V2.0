@@ -22,10 +22,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-@Configuration
+//@Configuration
 public class SpringShiroConfiguration {
 	
-	@Bean
+//	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(
 			@Autowired SecurityManager securityManager) {
 		// 构建bean对象，通过此对象创建过滤器工厂
@@ -41,6 +41,12 @@ public class SpringShiroConfiguration {
 				new LinkedHashMap<>();
 		// anon  表示允许不认证匿名访问
 		// authc 表示需要认证访问
+		map.put("/css/**", "anon");
+		map.put("/js/**", "anon");
+		map.put("/img/**", "anon");
+		map.put("/img2/**", "anon");
+		map.put("/image/**", "anon");
+		map.put("/webfonts/**", "anon");
 		map.put("/sys/bower_components/**", "anon");
 		map.put("/sys/build/**", "anon");
 		map.put("/sys/dist/**", "anon");

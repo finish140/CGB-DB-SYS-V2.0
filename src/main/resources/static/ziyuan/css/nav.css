@@ -1,0 +1,13 @@
+/* 外导航 */
+.out-nav{
+    margin-bottom: 0;
+    border: 0;
+    font-size: 16px!important;
+    letter-spacing: 3px;
+    opacity: 0.8;
+    background-color:#B1191A;
+}
+.out-nav li a, .out-nav .o-brand{
+    color:#fff!important;
+}
+

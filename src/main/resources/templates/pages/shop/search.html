@@ -1,0 +1,83 @@
+<ul id="goods-list">
+	<div style="width: 100%;height: 100px;line-height: 100px;text-align: center">没有任何记录</div>
+</ul>
+<script type="text/javascript">
+	$(function () {
+		var vars = [],
+			hash;
+		var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+		for (var i = 0; i < hashes.length; i++) {
+			hash = hashes[i].split('=');
+			vars.push(hash[0]);
+			vars[hash[0]] = hash[1];
+		}
+		$("body").data("categoryId",vars["categoryId"])
+		console.log($("body").data("categoryId"))
+		$("body").data("context",vars["context"])
+		doGetObject()
+	})
+	function doGetObject() {
+		var url = "search/doFindPage";
+		var pageCurrent = $(".fenye").data("pageCurrent")
+		var categoryId=$("body").data("categoryId")
+		//2.发起异步请求
+		//请问如下ajax请求的回调函数参数名可以是任意吗？可以,必须符合标识符的规范
+		if (!pageCurrent) pageCurrent = 1
+		var params = {
+			 "categoryId": categoryId, 
+			 "context":$("body").data("context"),
+			 "pageCurrent": pageCurrent
+			 };
+		console.log(params)	 
+		$.getJSON(url, params, function (result) {
+			doHandleResponseResult(result);
+		});
+	}
+	function doHandleResponseResult(result) {
+		if (result.state == 1) {
+			doSetTableBodyRow(result.data.records);
+			doSetPagination(result.data)
+		}
+	}
+	function doSetTableBodyRow(records) {
+		var g_list = $("#goods-list");
+		g_list.empty();
+		li = $("<li></li>")
+
+		for (var i in records) {
+			var li = $("<li></li>")
+			var info = doCreateLi(records[i]);
+			li.append(info);
+			g_list.append(li);
+		}
+	}
+	function doCreateLi(data) {
+		var decs = data.decs
+		if (!decs) decs = ""
+
+		var lis = "<div class=\"item-bg\">" +
+			"<div class=\"product-box\">" +
+			"<div class=\"res-img\">" +
+			"<a href=\"\">" +
+			"<img src=" + data.img + " alt=\"\" style=\"width: 220px;height:220px;\">" +
+			"</a>" +
+			"</div>" +
+			"<div class=\"res-info\">" +
+			"<div class=\"res-price\">" + data.price + "</div>" +
+			"<div class=\"title-selling-point\">" +
+			"<a href=\"#\" style=\"color: #000;font-size: 10px;letter-spacing: 1px\">" + data.context + "</a>" +
+			"</div>" +
+			"<div class=\"res-decs\">" +
+			decs +
+			"</div>" +
+			"<div class=\"res-assess\">" +
+			"<span id=\"assess\">888+</span> 条评价" +
+			"</div>" +
+			"<div class=\"res-opt\">" +
+			"<ul>" +
+			"<li><i class=\"far fa-star\"></i> 收藏</li>" +
+			"<li><i class=\"fas fa-shopping-cart\"></i> 加入购物车</li>" +
+			"</ul></div></div></div></div>"
+		return lis;
+	}
+</script>

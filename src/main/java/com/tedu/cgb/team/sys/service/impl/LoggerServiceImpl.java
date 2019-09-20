@@ -29,14 +29,18 @@ public class LoggerServiceImpl implements LoggerService {
 		
 		LoggerExample loggerExample = new LoggerExample();
 		Criteria criteria = loggerExample.createCriteria();
+		
+		
 		if (username != null) {
 			criteria.andUsernameLike("%" + username + "%");
 		}
 		int rowCount = loggerMapper.countByExample(loggerExample);
+		
+		
 		ResultValidator.validateResult(rowCount, "没有找到相应的记录");
 		int pageSize = DEFAULT_PAGE_SIZE;
-		PageHelper.startPage(pageCurrent, DEFAULT_PAGE_SIZE);
 		
+		PageHelper.startPage(pageCurrent, DEFAULT_PAGE_SIZE);
 		List<Logger> records = loggerMapper.selectByExample(loggerExample);
 		
 		ResultValidator.validateResult(records, "没有找到相应的记录");

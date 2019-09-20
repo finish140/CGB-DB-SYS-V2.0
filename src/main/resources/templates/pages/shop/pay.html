@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="ziyuan/css/bootstrap.css">
+    <link rel="stylesheet" href="ziyuan/css/nav.css">
+    <!-- <link rel="stylesheet" href="ziyuan/css/model.css"> -->
+    <link rel="stylesheet" href="ziyuan/css/all.css">
+
+    <title>体育</title>
+    <style>
+        #footer-2014 {
+            /* border-top: 1px solid #E5E5E5; */
+            padding: 20px 0 30px;
+            text-align: center;
+        }
+
+        #footer-2014 .links a {
+            margin: 0 10px;
+        }
+
+        #footer-2014 .copyright {
+            margin: 10px 0;
+        }
+
+        #logo-1 img {
+            width: 270px;
+            height: 60px;
+            margin-top: -4px;
+            margin-left: 9px;
+            float: left;
+        }
+
+        .login li a:hover {
+            color: #007bff !important;
+            background-color: #f8f9fa !important;
+            text-decoration: none;
+        }
+
+        .fa-basketball-ball {
+            color: coral;
+            font-size: 60px;
+        }
+
+        .navbar {
+            opacity: 1;
+        }
+
+        .fa-thumbs-up {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+
+        .like {
+            color: red;
+        }
+
+        .fa-thumbs-up:active {
+            color: red;
+            transform: scale(2, 2);
+            transition: transform 0.1s;
+        }
+
+        .shop {
+            border-radius: 0;
+            transform: .2;
+        }
+
+        .shop:hover,
+        .shop:focus {
+            background-color: #CD5555;
+        }
+
+        .card {
+            border-radius: 0;
+        }
+
+        .shop a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .card:hover {
+            transform: scale(1.05, 1.05);
+            transition: transform 0.1s;
+        }
+
+        .act {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .tx {
+            font-size: 2rem;
+            color: #bbb;
+        }
+
+        .current {
+            transform: scale(1.5, 1.5);
+            color: #666;
+        }
+
+        #dy:hover {
+            color: #428bca;
+        }
+
+        .login-tb {
+            border-radius: 50%;
+            font-size: 30px;
+
+        }
+
+        /* .login-zh{
+      display: none;
+    } */
+        .login-ewm {
+            display: none;
+        }
+
+        .login-at {
+            border-bottom: solid #dc3545;
+            ;
+            cursor: pointer;
+        }
+
+        .login-de {
+            border-bottom: solid #9E9E9E;
+            color: #9E9E9E;
+            cursor: pointer;
+        }
+
+        .zf {
+
+            box-shadow: 0px 0px 10px #aaaaaa;
+        }
+
+        .c-bank {
+            height: 60px;
+            line-height: 55px;
+            border: 3px solid #fff;
+            cursor: pointer;
+        }
+
+        .contact .form-group .form-control {
+            border-radius: 0;
+        }
+
+        .fa-phone,
+        .name,
+        .fa-map-marker-alt,
+        .fa-envelope {
+            font-size: 18px;
+        }
+
+        .f-con {
+            font-size: 10px;
+        }
+
+        .footer-social li {
+            width: 35px;
+            height: 35px;
+            background: #9E9E9E;
+            font-size: 15px;
+            border-radius: 50%;
+            padding-top: 10px;
+            color: #fff;
+        }
+
+        .footer-social li:hover {
+            color: #fff;
+            background: orange;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body data-spy="scroll" data-target="#mylist" data-offset="100">
+    <!-- 以下为模态框内容 -->
+    <!-- 登录 -->
+    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered" role="document" style="max-width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: none;">
+                    <div class="text-center mt-3 login-at" style="width: 200px;height: 40px;margin-left: 30px;">账号登录
+                    </div>
+                    <div class=" text-center mt-3 login-de" style="width: 200px;height: 40px;">二维码登录
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 10px;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- 账号登录 -->
+                <div class="modal-body login-zh">
+                    <div style="max-width: 400px;margin-left: 30px;">
+                        <form action="denglu.php" method="post">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="num" placeholder="请输入账号">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="pwd" placeholder="请输入密码">
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-6 ">
+                                    <div class="form-check">
+                                        <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                                        <label for="remember" class="form-check-label">记住账号</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 text-right mt-1" style="font-size: 10px">
+                                    <span>忘记密码</span>
+                                    <span>|</span>
+                                    <span>去注册</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal">登录</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- 二维码登录 -->
+                <div class="modal-body login-ewm">
+                    <div style="display: flex;justify-content:center;">
+                        <img src="ziyuan/image/ewm.png" style="max-width: 200px;max-height:200px;">
+                    </div>
+                </div>
+                <div class="modal-footer " style="justify-content:left;">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 pt-3 d-none  d-md-inline">
+                                其他登录方式：&nbsp;
+                            </div>
+                            <div class="col-12 col-md-8">
+                                <button type="button" class="btn btn-link login-tb" data-toggle="tooltip"
+                                    data-placement="top" title="微信登录">
+                                    <i class="fab fa-weixin" style="color: #28a745;"></i></button>
+                                <button type="button" class="btn btn-link login-tb" data-toggle="tooltip"
+                                    data-placement="top" title="QQ登录"><i class="fab fa-qq"
+                                        style="color: #007bff;"></i></button>
+                                <button type="button" class="btn btn-link login-tb" data-toggle="tooltip"
+                                    data-placement="top" title="微博登录"><i class="fab fa-weibo"
+                                        style="color: #dc3545;"></i></button>
+                                <button type="button" class="btn btn-link login-tb" data-toggle="tooltip"
+                                    data-placement="top" title="支付宝登录"><i class="fab fa-alipay"
+                                        style="color: #007bff;"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 以上为模态框内容 -->
+
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-light bg-light navbar-expand-md sticky-top" style="margin-top: 10px;height: 30px;">
+        <div class="container">
+            <ul class="navbar-nav mt-1">
+                <li style="list-style-type: none">
+                    <i class="fas fa-home"></i>
+                    <a class="navbar-brand" style="color: #707070;font-size: 12px;" href="index-2.html">首页</a>
+                </li>
+                <li style="list-style-type: none">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a class="navbar-brand" style="color: #707070;font-size: 12px;" href="#">广东</a>
+                </li>
+            </ul>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav" style="height:20;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="mynav">
+                <ul class="navbar-nav  ml-auto login">
+                    <li style="list-style-type: none;font-size: 12px;">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal">登陆</a>
+                        <span style="color: #007bff ">|</span>
+                        <a href="register.html">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 图片和进度条 -->
+    <div class="container mt-3 ">
+        <div class="row ">
+            <div class="col-md-4 mt-4 ">
+                    <a href="index-2.html"><div id="logo-1"><img src="ziyuan/image/logo.jpg"></div></a>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-5 mt-3">
+                <div class="d-flex justify-content-between mb-4">
+                    <i class="fas fa-shopping-cart tx"></i>
+                    <i class="fas fa-file-invoice  tx"></i>
+                    <i class="fab fa-alipay  current   tx"></i>
+                    <i class="fas fa-gift tx"></i>
+                </div>
+                <div class="px-4 mb-4">
+                    <div class="progress">
+                        <div class="progress-bar bg-success" style="width: 66.66%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container zf" style="height: 750px;">
+        <hr style="height:5x;color: #555" />
+        <div class="row bg-light ml-3 mr-3">
+            <div class="col-4 col-md-2">
+                <img src="" alt="">
+            </div>
+            <div class="col-6 col-md-8 text-left ml-n5  ">
+                <h6 class="pt-3">斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</h6>
+                <span>卖家：YH商城</span>
+
+            </div>
+            <div class="col-2 col-md-2 text-right pt-3">
+                <h4 style="color:orangered;">￥199</h4>
+            </div>
+        </div>
+        <div class="row ml-1 mr-1">
+            <div class="col ">
+                <div class="form-check mt-3 c-bank" style="border: 3px solid #007bff">
+                    <input class="form-check-input " style="margin-top: 22px;margin-left: -10px;" type="radio"
+                        name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                        &emsp;<i class="fab fa-bandcamp"></i> &emsp;中国工商银行
+                        &emsp;<span>123****789</span>
+                        &emsp;<span>储蓄卡 | 快捷</span>
+                    </label>
+                </div>
+                <div class="form-check mt-3 c-bank">
+                    <input class="form-check-input" style="margin-top: 22px;margin-left: -10px;" type="radio"
+                        name="exampleRadios" id="exampleRadios2" value="option2">
+                    <label class="form-check-label" for="exampleRadios2">
+                        &emsp;<i class="fab fa-bandcamp"></i> &emsp;中国农业银行
+                        &emsp;<span>123****789</span>
+                        &emsp;<span>储蓄卡 | 快捷</span>
+                    </label>
+                </div>
+                <div class="form-check mt-3 c-bank">
+                    <input class="form-check-input" style="margin-top: 22px;margin-left: -10px;" type="radio"
+                        name="exampleRadios" id="exampleRadios3" value="option3">
+                    <label class="form-check-label" for="exampleRadios3">
+                        &emsp;<i class="fab fa-bandcamp"></i> &emsp;中国建设银行
+                        &emsp;<span>123****789</span>
+                        &emsp;<span>储蓄卡 | 快捷</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <hr style="height:5x;color: #555" />
+        <div class="row ml-3 mr-3">
+            <div class="col-5 col-md-2 text-center" style="border: solid 2px #6c757d;height: 40px;line-height: 35px;">
+                <a href="#">其他付款方式</a>
+            </div>
+            <div class="col-5 col-md-2 text-center ml-3" style="border:dotted 2px;height: 40px;line-height: 35px;">
+                <a href="#">添加快捷/网银付款</a>
+            </div>
+        </div>
+        <div class="row mt-5 ml-3 mr-3">
+            <p style="color: orangered">安全设置检测成功！无需短信校验</p>
+        </div>
+        <div class="row mt-3 ml-3 mr-3">
+            <p>支付密码：</p>
+        </div>
+        <div class="row ml-3 mr-3">
+            <div class="col-7 col-md-3 ml-n3">
+                <div class="input-group" id="wrap">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <input type="password" id="pwd" maxlength="1" class="form-control"
+                        onkeyup="value=value.replace(/[^\d]/g,'')" onblur="value=value.replace(/[^\d]/g,'')">
+                    <!-- onkeyup="value=value.replace(/[^\d]/g,'')"   
+                    onblur="value=value.replace(/[^\d]/g,'')" -->
+                </div>
+                <div class="input-group mt-2" id="wrap">
+                    <span style="color: #9E9E9E">请输入6位数字密码</span>
+                </div>
+            </div>
+        </div>
+        <div class="row ml-3 mr-3 mt-3">
+            <div class="col-7 col-md-2  ml-n3">
+                <button type="submit" class="btn btn-primary btn-block" data-dismiss="modal" id="pay"><a
+                        href="succes.html" style="text-decoration: none;color:#fff;">确认支付</a></button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <!-- 页脚 -->
+    <hr>
+    <!-- 页脚 -->
+    <div class="y">
+        <div id="footer-2014">
+            <div class="links">
+                <a>关于我们</a>
+                |
+                <a>联系我们</a>
+                |
+                <a>商家入驻</a>
+                |
+                <a>营销中心</a>
+                |
+                <a>手机电商</a>
+                |
+                <a>友情链接</a>
+                |
+                <a>销售联盟</a>
+                |
+                <a>电商社区</a>
+                |
+                <a>电商公益</a>
+                |
+                <a>English Site</a>
+                |
+                <a>Contact Us</a>
+
+
+
+            </div>
+            <div class="copyright">
+                北京市公安局朝阳分局备案编号110105014669&nbsp;&nbsp;|&nbsp;&nbsp;京ICP证070359号&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a>
+                    互联网药品信息服务资格证编号(京)-经营性-2014-0008
+                </a>
+                | 新出发京零 字第大120007号
+                <br>
+                <a>
+                    音像制品经营许可证苏宿批005号
+                </a>
+                | 出版物经营许可证编号新出发(苏)批字第N-012号 | 互联网出版许可证编号新出网证(京)字150号
+                <br>
+                <a>
+                    网络文化经营许可证京网文[2014]2148-348号
+                </a>
+                违法和不良信息举报电话：4006561155 Copyright © 2004-2015 电商JD.com 版权所有
+                <br>
+                电商旗下网站：
+                <a>360TOP</a>
+                &nbsp;&nbsp;
+                <a>拍拍网</a>
+                &nbsp;&nbsp;
+                <a>网银在线</a>
+
+
+
+            </div>
+            <div class="authentication">
+                <a>
+                    <img src="ziyuan/img2/l1.png">
+                </a>
+                <a>
+                    <img src="ziyuan/img2/l2.png">
+                </a>
+                <a>
+                    <img src="ziyuan/img2/l3.png">
+                </a>
+                <a>
+                    <img src="ziyuan/img2/l4.png">
+                </a>
+                <a>
+                    <img src="ziyuan/img2/l5.png">
+                </a>
+                <a>
+                    <img src="ziyuan/img2/p1.jpg">
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="ziyuan/js/jquery-3.4.0.js"></script>
+    <script src="ziyuan/js/popper.min.js"></script>
+    <script src="ziyuan/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.modal-header').on('click', '.login-de', function () {
+                $('.login-at').addClass("login-de")
+                $('.login-de').removeClass("login-at")
+                $(this).removeClass("login-de")
+                $(this).addClass("login-at")
+
+                var a = "账号登录";
+
+                if ($(this).text() == a) {
+                    $('.login-ewm').hide();
+                    $('.login-zh').show();
+                } else {
+                    $('.login-zh').hide();
+                    $('.login-ewm').show();
+                }
+            })
+        });
+        $(document).ready(function () {
+            $('.c-bank').on('click', function () {
+                $(this).css("border", "3px solid #007bff")
+                $(this).siblings("div").css("border", "3px solid #fff")
+                $(this).siblings("div").children("input").removeAttr("checked")
+                $(this).children("input").prop("checked", "true")
+            })
+        });
+        function IsDate(str) {
+            var reg = /[^\d]/g;
+            return reg.test(str);
+
+        }
+
+        onload = function () {
+            var txts = wrap.getElementsByTagName("input");
+            for (var i = 0; i < txts.length; i++) {
+                var t = txts[i];
+                t.index = i;
+                t.onkeyup = function () {
+                    var a = this.value
+                    if (IsDate(a)) {
+                        alert("请输入数字");
+                    } else {
+                        var next = this.index + 1;
+                        if (next > txts.length - 1) return;
+                        txts[next].focus();
+                    }
+                }
+
+            }
+
+        }
+
+    //        var pwd=$('.wrap')     
+    //        var _this=pwd.find('input')
+    //        _this=pwd.on('keyup',function(e){
+    //             var char=e.keyCode
+    //             document.getElementById("1").innerHTML = " Unicode 字符代码为: " + char;
+    //         })
+    </script>
+</body>
+
+</html>

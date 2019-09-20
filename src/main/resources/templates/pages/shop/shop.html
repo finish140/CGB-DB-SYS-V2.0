@@ -1,0 +1,930 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <!-- <link rel="stylesheet" href="css/model.css"> -->
+  <link rel="stylesheet" href="css/all.css">
+
+  <title>体育</title>
+  <style>
+      .menu-1 {
+      background-color: #EE1289;
+      opacity: 0.9;
+      margin-top: 4px;
+      border-radius: 0;
+      border: none;
+      min-width: 10px;
+    }
+
+    .menu-2 {
+      background-color: #C0FF3E;
+      opacity: 0.9;
+
+    }
+
+    .login li a:hover {
+      color: #C0FF3E !important;
+      background-color: #EE1289 !important;
+    }
+
+    .fa-basketball-ball {
+      color: coral;
+      font-size: 40px;
+    }
+
+    .navbar {
+      opacity: 1;
+    }
+
+    .fa-thumbs-up {
+      font-size: 2rem;
+      color: #ddd;
+      cursor: pointer;
+      transition: transform 0.5s;
+    }
+
+    .like {
+      color: red;
+    }
+
+    .fa-thumbs-up:active {
+      color: red;
+      transform: scale(2, 2);
+      transition: transform 0.1s;
+    }
+
+    .shop {
+      border-radius: 0;
+      transform: .2;
+    }
+
+    .shop:hover,
+    .shop:focus {
+      background-color: #CD5555;
+    }
+
+    .card {
+      border-radius: 0;
+    }
+
+    .shop a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .card:hover {
+      transform: scale(1.05, 1.05);
+      transition: transform 0.1s;
+    }
+
+    .act {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .login-tb{
+      border-radius:50%;
+      font-size: 30px;
+      
+    }
+    /* .login-zh{
+      display: none;
+    } */
+    .login-ewm{
+      display: none;
+      }
+    .login-at{
+      border-bottom: solid #dc3545;;
+      cursor: pointer;
+    }
+    .login-de{
+      border-bottom: solid #9E9E9E;color:#9E9E9E;
+      cursor: pointer;
+    }
+
+    .contact .form-group .form-control{
+      border-radius: 0;
+    }
+    .fa-phone,.name,
+    .fa-map-marker-alt,
+    .fa-envelope{
+      font-size: 18px;
+    }
+    .f-con{
+      font-size: 10px;
+    } 
+    .footer-social li{
+      width: 35px;
+      height: 35px;
+      background: #9E9E9E;
+      font-size: 15px;
+      border-radius: 50%;
+      padding-top: 10px;
+      color: #fff;   
+    }
+    .footer-social li:hover{
+      color: #fff;  
+      background: orange;
+      cursor: pointer;
+    }
+    #pp,#bs,#foot{
+      cursor: pointer;
+    }
+  
+  </style>
+</head>
+
+<body data-spy="scroll" data-target="#mylist" data-offset="100">
+  <!-- 以下为模态框内容 -->
+  <!-- 登录 -->
+  <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog  modal-dialog-centered" role="document" style="max-width: 500px;">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom: none;">
+        <div class="text-center mt-3 login-at"
+          style="width: 200px;height: 40px;margin-left: 30px;">账号登录</div>
+        <div class=" text-center mt-3 login-de" style="width: 200px;height: 40px;">二维码登录
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="padding: 10px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- 账号登录 -->
+      <div class="modal-body login-zh" >
+        <div style="max-width: 400px;margin-left: 30px;">
+          <form action="denglu.php" method="post">
+            <div class="form-group" >
+              <input type="text" class="form-control" id="num" placeholder="请输入账号">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" id="pwd" placeholder="请输入密码">
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6 ">
+                <div class="form-check">
+                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
+                  <label for="remember" class="form-check-label">记住账号</label>
+                </div>
+              </div>
+              <div class="col-md-6 text-right mt-1" style="font-size: 10px">
+                <span>忘记密码</span>
+                <span>|</span>
+                <span>去注册</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal">登录</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- 二维码登录 -->
+      <div class="modal-body login-ewm" >
+          <div style="display: flex;justify-content:center;">
+          <img src="image/ewm.png" style="max-width: 200px;max-height:200px;" >
+          </div>
+        </div>
+      <div class="modal-footer " style="justify-content:left;">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4 pt-3 d-none  d-md-inline">       
+              其他登录方式：&nbsp;        
+            </div>
+            <div class="col-12 col-md-8">  
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微信登录">
+              <i class="fab fa-weixin" style="color: #28a745;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="QQ登录"><i
+                class="fab fa-qq" style="color: #007bff;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="微博登录"><i
+                class="fab fa-weibo" style="color: #dc3545;"></i></button>
+            <button type="button" class="btn btn-link login-tb" data-toggle="tooltip" data-placement="top" title="支付宝登录"><i
+                class="fab fa-alipay" style="color: #007bff;"></i></button>
+            </div>     
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- 购买 -->
+  <div class="modal fade bd-example-modal-sm " id="goumai" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">注册</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">用户名:</label>
+              <input type="text" class="form-control" id="register-user">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">密码:</label>
+              <input type="password" class="form-control" id="register-pwd">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">再次输入密码:</label>
+              <input type="password" class="form-control" id="register-pwd">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary " data-dismiss="modal">注册</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 以上为模态框内容 -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6 mt-3">
+          <a href="index-2.html"><i class="fas fa-basketball-ball"><span >&nbsp;YH体育</span></i></a> 
+      </div>
+    </div>
+  </div>
+  <!-- 导航栏 -->
+  <nav class="navbar navbar-dark navbar-expand-md out-nav sticky-top" style="margin-top: 10px;height: 50px;">
+    <div class="container">
+      <a class="navbar-brand o-brand" href="index.html">YH的体育网</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id="mynav" style="background-color: #EE1289">
+        <ul class="navbar-nav o-n">
+          <li class="nav-item">
+            <a href="index-2.html" class="nav-link ">主页</a>
+          </li>
+          <li class="nav-item">
+            <a href="shop.html" class="nav-link ">商&nbsp;店</a>
+          </li>
+          <li class="nav-item  dropdown">
+            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">球类运动</a>
+            <div class="dropdown-menu menu-1">
+              <a href="content-bask.html" class="dropdown-item">篮球</a>
+              <a href="" class="dropdown-item">足球</a>
+              <a href="" class="dropdown-item">乒乓球</a>
+              <a href="" class="dropdown-item">羽毛球</a>
+              <a href="" class="dropdown-item">网球</a>
+              <a href="" class="dropdown-item">更多</a>
+            </div>
+          </li>
+          <li class="nav-item  dropdown">
+            <a href="" class="nav-link dropdown-toggle" data-toggle="dropdown">田径运动</a>
+            <div class="dropdown-menu menu-1">
+              <a href="" class="dropdown-item">跑步</a>
+              <a href="" class="dropdown-item">跨栏</a>
+              <a href="" class="dropdown-item">撑杆跳</a>
+              <a href="" class="dropdown-item">跳远</a>
+              <a href="" class="dropdown-item">跳高</a>
+              <a href="" class="dropdown-item">更多</a>
+            </div>
+          </li>
+        </ul>
+        <form action="" method="post" class="ml-md-3">
+          <div class="input-group input-group-sm">
+            <input type="text" name="search" id="search" class="form-control">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+          <div class="ls border p-3 d-none position-absolute bg-white " style="width:400px;" >
+            <p>搜索历史</p>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">足球<span id="cls" style="margin-left: 10px;">&times;</span></a>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">篮球<span id="cls" style="margin-left: 10px;">&times;</span></a>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">网球<span id="cls" style="margin-left: 10px;">&times;</span></a>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">乒乓球<span  id="cls"style="margin-left: 10px;">&times;</span></a>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">跳高<span id="cls" style="margin-left: 10px;">&times;</span></a>
+            <a class="d-inline-block  border border-primary rounded-pill pl-3 pr-1 py-1 mr-2 mt-2" id="si" href="">跳远<span id="cls" style="margin-left: 10px;">&times;</span></a>
+        </div>    
+        </form>
+        <ul class="navbar-nav i-n ml-auto login">
+          <li style="list-style-type: none">
+            <a href="#" data-toggle="modal" data-target="#exampleModal">登陆</a>
+            <span style="color: #fff">|</span>
+            <a href="register.html">注册</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- 轮番 -->
+  <div class="bg-white" style="width: 100%;">
+    <div class="container ">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner" >
+            <div class="carousel-item active">
+              <img src="image/lf1.jpg" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="image/lf4.jpg" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+              <img src="image/lf3.jpg" class="d-block w-100">
+            </div>
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  <!-- 内导航 -->
+  <div class="container">
+    <nav class="navbar navbar-expand-md s-nav" style="margin-top: 10px;">
+      <div class="container">
+        <a class="navbar-brand s-brand " href="index.html">商品</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mynav2">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="mynav2">
+          <ul class="navbar-nav s-n">
+            <li class="nav-item">
+              <a class="nav-link active" id="bs">篮球</a>
+            </li>
+            <li class="nav-item">
+              <a " class="nav-link" id="foot">足球</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link " id="pp">乒乓球</a>
+            </li>
+            <li class="nav-item">
+              <a href="shop.html" class="nav-link ">网球</a>
+            </li>
+            <li class="nav-item">
+              <a href="shop.html" class="nav-link ">羽毛球</a>
+            </li>
+            <li class="nav-item">
+              <a href="shop.html" class="nav-link ">更多</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- 篮球 -->
+  <div class="container" id="bs1" style="margin-top: 1rem;">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/basketball1.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%"><a href="shop_g.html">购买</a></button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 足球 -->
+  <div class="container" id="foot1" style="margin-top: 1rem;display: none;">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/Football.jpg" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥122</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 乒乓球 -->
+  <div class="container" id="pp1" style="margin-top: 1rem;display: none;">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card mb-3">
+          <img src="image/pingpang.png" alt="" class="card-img-top">
+          <div class="card-body" style="background-color: #FAF0E6">
+            <h5 class="card-title" style="color:#FF0000;">￥199</h5>
+            <p>斯伯丁室内外比赛训练PU皮7号耐磨防滑篮球76-095</p>
+            <button class="btn btn-danger shop " style="width: 35%">购买</button>
+            <button class="btn btn-danger shop "><i class="fas fa-shopping-cart"></i>&nbsp;加入购入车</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-end ">
+        <li class="page-item"><a class="page-link" href="#">
+            <span aria-hidden="true">&laquo;</span></a>
+        </li>
+        <li class="page-item"><a class="page-link act" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" style="color: #007bff; ">
+            ●&nbsp;●&nbsp;●</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">100</a></li>
+        <li class="page-item"><a class="page-link" href="#">
+            <span aria-hidden="true">&raquo;</span></a></li>
+      </ul>
+    </nav>
+  </div>
+  </div>
+  </div>
+  <!-- 页脚 -->
+  <footer class="footer mt-5 bg-light"  role="contentinfo">
+      <div class="container py-5">
+        <div class="row">
+            <div class="col-4">
+                <h5>CONTACT&nbsp;<span style="color: orange">INFO</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <i class="fas fa-phone"></i><span class="ml-3 name" style="color: orange">Telefone</span>
+                    <p class="mt-2 f-con">(000) 123 456 78- (000) 123 4567 89</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-map-marker-alt"></i><span class="ml-3 name" style="color: orange">Address</span>
+                    <p class="mt-2 f-con">2046 Blue Spruce Lane Laurel Canada</p>
+                  </li>
+                  <li>
+                    <i class="fas fa-envelope"></i><span class="ml-3 name" style="color: orange">E mail</span>
+                    <p class="mt-2 f-con">rest@gmail.com - rest@mail.ru</p>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>LATEST<span style="color: orange"> BLOG POSTS</span></h5>
+                <ul class="list-unstyled footer-link mt-3">
+                  <li>
+                    <p class="name" style="color: orange">Nov 9-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                  <li>
+                    <p class="name" style="color: orange">Sep 8-2014</p>
+                    <p class="mt-2 f-con">Lorem ipsum dolor sit amet, consectetur adip iscing elit. Curabitur ut blandit sapien</p>
+                  </li>
+                
+                </ul>
+            </div>
+            <div class="col-4">
+                <h5>PHOTO <span style="color: orange">STREAM</span></h5>
+                <p class="mt-2 f-con">No content</p>
+                <h6>Follow <span style="color: orange">US</span></h6>
+                <ul class="list-unstyled footer-link d-flex footer-social text-center mt-3">
+                    <li class="fab fa-twitter"></li>
+                    <li class="fab fa-facebook-f ml-3"></li>
+                    <li class="fab fa-dribbble ml-3 "></li>
+                    <li class="fab fa-behance ml-3"></li>
+                  </ul>
+            </div>
+        </div>
+      </div>
+    </footer>
+
+
+  <script src="js/jquery-3.4.0.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#bs").click(function () {
+        $("#foot1").hide();
+        $("#pp1").hide();
+        $("#bs1").show();
+      });
+      $("#pp").click(function () {
+        $("#bs1").hide();
+        $("#foot1").hide();
+        $("#pp1").show();
+      });
+      $("#foot").click(function () {
+        $("#bs1").hide();
+        $("#pp1").hide();
+        $("#foot1").show();
+      });
+    });
+    $(document).ready(function () {
+      $('.modal-header').on('click','.login-de', function () {
+        $('.login-at').addClass("login-de")
+        $('.login-de').removeClass("login-at")
+        $(this).removeClass("login-de")
+        $(this).addClass("login-at")
+        
+        var a="账号登录";
+        var b="二维码登录";
+        if($(this).text()==a){
+          $('.login-ewm').hide();
+          $('.login-zh').show();
+        }else{
+          $('.login-zh').hide();
+          $('.login-ewm').show();
+        }
+      })
+    });
+    $(document).ready(function () {
+            $('#search').focus(function(){
+                $('.ls').removeClass("d-none")
+            })
+            $('#search').blur(function(){
+                $('.ls').addClass("d-none")
+            })
+        })
+  </script>
+</body>
+
+</html>
