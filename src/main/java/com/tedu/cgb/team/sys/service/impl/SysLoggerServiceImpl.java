@@ -14,10 +14,10 @@ import com.tedu.cgb.team.common.entity.Logger;
 import com.tedu.cgb.team.common.util.Assert;
 import com.tedu.cgb.team.common.util.ResultValidator;
 import com.tedu.cgb.team.common.vo.Page;
-import com.tedu.cgb.team.sys.service.LoggerService;
+import com.tedu.cgb.team.sys.service.SysLoggerService;
 
 @Service
-public class LoggerServiceImpl implements LoggerService {
+public class SysLoggerServiceImpl implements SysLoggerService {
 	
 	@Autowired
 	private LoggerMapper loggerMapper;

@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tedu.cgb.team.common.entity.Logger;
 import com.tedu.cgb.team.common.vo.JsonResult;
 import com.tedu.cgb.team.common.vo.Page;
-import com.tedu.cgb.team.sys.service.LoggerService;
+import com.tedu.cgb.team.sys.service.SysLoggerService;
 
 @RequestMapping("/sys/log/")
 @RestController
-public class LoggerController {
+public class SysLoggerController {
 	
 	@Autowired
-	private LoggerService loggerService;
+	private SysLoggerService loggerService;
 	
 	@RequestMapping("doFindPage")
 	public JsonResult doFindPage(String username, Integer pageCurrent) {

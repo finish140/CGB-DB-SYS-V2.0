@@ -4,7 +4,7 @@ package com.tedu.cgb.team.sys.service;
 import com.tedu.cgb.team.common.entity.User;
 import com.tedu.cgb.team.common.vo.Page;
 
-public interface UserService {
+public interface SysUserService {
 	Page<User> findPageObjects(String username, Integer pageCurrent);
 	
 	int saveObject(User user);

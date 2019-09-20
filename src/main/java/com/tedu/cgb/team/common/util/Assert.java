@@ -141,4 +141,12 @@ public abstract class Assert {
 		}
 	}
 
+
+	public static void noNullElement(Collection<?> collection, String exceptionMessage) {
+		notNull(collection, exceptionMessage);
+		for (Object object : collection) {
+			notNull(object, exceptionMessage);
+		}
+	}
+
 }

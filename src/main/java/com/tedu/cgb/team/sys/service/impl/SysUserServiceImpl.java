@@ -17,10 +17,10 @@ import com.tedu.cgb.team.common.util.Assert;
 import com.tedu.cgb.team.common.util.ResultValidator;
 import com.tedu.cgb.team.common.util.ShiroUtils;
 import com.tedu.cgb.team.common.vo.Page;
-import com.tedu.cgb.team.sys.service.UserService;
+import com.tedu.cgb.team.sys.service.SysUserService;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class SysUserServiceImpl implements SysUserService {
 	@Autowired
 	private UserMapper userMapper;
 	private static final Integer DEFAULT_PAGE_SIZE = 5;

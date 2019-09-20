@@ -13,7 +13,7 @@ import com.tedu.cgb.team.common.annotation.OperationLogger;
 import com.tedu.cgb.team.common.entity.Logger;
 import com.tedu.cgb.team.common.util.IPUtils;
 import com.tedu.cgb.team.common.util.ShiroUtils;
-import com.tedu.cgb.team.sys.service.LoggerService;
+import com.tedu.cgb.team.sys.service.SysLoggerService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoggerAspect {
 	@Autowired
-	private LoggerService sysLogService;
+	private SysLoggerService sysLogService;
 	
 	/**
 	 * @Pointcut 注解用于描述或定义一个切入点，

@@ -1,0 +1,186 @@
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<h3 class="box-title">日志管理</h3>
+
+				<div class="box-tools">
+					<div class="input-group input-group-sm" style="width: 350px;">
+						<input type="text" name="table_search" id="searchNameId"
+							class="form-control pull-right" placeholder="用户名">
+
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default btn-search">
+                                <i class="fa fa-search"></i>
+							</button>
+							<button type="button" class="btn btn-default btn-delete">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box-header -->
+			<div class="box-body table-responsive no-padding">
+				<table class="table table-hover" id="tableId">
+					<thead>
+						<tr>
+						    <th><input width="3%" type="checkbox" id="checkAll">全选</th>
+							<th width="5%">编号</th>
+							<th width="10%">商品图片</th>
+							<th width="40%">商品标题</th>
+							<th>商品价格</th>
+							<th>商品分类</th>
+							<th>商品描述</th>
+						</tr>
+					</thead>
+					<tbody id="tbodyId">
+					</tbody>
+				</table>
+			</div>
+			<div id="pageId" class="box-footer clearfix">
+			      
+			</div>
+			<!-- /.box-body -->
+		</div>
+		<!-- /.box -->
+	</div>
+</div>
+<script type="text/javascript">
+
+	// 页面加载完毕后进行一次查询
+	$(function(){
+		$("#pageId").load("doPageUI", doGetObjects());
+	});
+	
+	// 异步请求服务端的用户行为日志信息
+	function doGetObjects(){
+		var url = "product/doFindPage";
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		if(!pageCurrent) pageCurrent = 1;
+			var params = {"pageCurrent" : pageCurrent};
+		var context = $("#searchNameId").val();
+		   if(context) params.context = context; // 查询时需要
+		$.getJSON(url, params, function(result) {
+			doHandleResponseResult(result);
+		});
+	}
+	
+	// 查询按钮函数
+	function doQueryObjects() {
+		$("#pageId").data("pageCurrent", 1);
+		doGetObjects();
+	}
+	
+	// 删除按钮函数
+	function doDeleteObjects() {
+		var ids = doGetCheckedIds();
+			if(ids.length == 0) {
+				alert("至少选择一个");
+				return;
+			}
+		var url = "log/doDeleteByIds";
+		var params = {"ids" : ids.toString()};
+		if(!confirm('确定要删除吗')) return;
+		$.post(url, params, function(result) {
+			if(result.state == 1) {
+				alert(result.message);
+				doGetObjects();
+				doRefreshPage();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+	
+	// 解析Json对象，获取result里封装的Page对象的records的数据并显示
+	function doHandleResponseResult(result) {
+		if(result.state == 1) {
+			doSetTableBodyRow(result.data.records);
+			doSetPagination(result.data);
+		} else {
+			alert(result.message);
+		}
+	}
+	
+	// 更新table里的数据
+	function doSetTableBodyRow(records) {
+		var tBody = $("#tbodyId");
+		tBody.empty();
+		for(var i = 0; i < records.length; i++) {
+			var tr = $("<tr></tr>");
+			var tds = doCreateTds(records[i]);
+			tr.append(tds);
+			tBody.append(tr);
+		}
+		$("#tableId img").css("height", "70px");
+		$("td").css("vertical-align", "middle");
+	}
+	
+	// 创建table当前行里的列数据
+	function doCreateTds(data) {
+		var tds = "<td><input type='checkbox' class='cBox' name='cItem' value='" + data.id + "'></td>"
+			+ "<td>" +  data.product.id   + "</td>"
+			+ "<td><img src=http://localhost/" + data.product.img + "/></td>"
+			+ "<td>" +  data.product.context  + "</td>"
+			+ "<td>" +  data.product.price  + "</td>"
+			+ "<td>" +  data.categoryTypeName  + "</td>"
+			+ "<td>" +  data.product.decs   + "</td>";	   
+		return tds;
+	}
+	
+	// 按钮事件
+	$(".input-group-btn")
+		.on("click", ".btn-search", doQueryObjects)
+		.on("click", ".btn-delete", doDeleteObjects);
+  	// 全选按钮事件注册
+	$("#checkAll").change(doChangeTBodyCheckBoxState);
+	// 基于tbody中checkbox状态,修改thead中checkbox状态
+	$("#tbodyId").on("change",".cBox",doChangeTHeadCheckBoxState)
+	
+	// 获取用户选中的id参数数组
+	function doGetCheckedIds() {
+		var array=[]; // new Array();
+		$("#tbodyId input[type=checkbox]")
+			.each(function() {
+				if($(this).prop("checked")) {
+					array.push($(this).val());
+				}
+			});
+		return array;
+	 }
+	
+	// 检查.thead的全选框，并执行全选/全不选操作
+	function doChangeTHeadCheckBoxState() {
+		var flag = true;
+		$("#tbodyId input[type='checkbox']")
+		.each(function() {
+			flag = flag && $(this).prop("checked")
+		});
+		$("#checkAll").prop("checked", flag);
+	}
+	
+	// 检查.tbody的全选框，并执行全选/全不选操作
+	function doChangeTBodyCheckBoxState() {
+		var flag = $(this).prop("checked"); // true or false
+		$("#tbodyId input[type='checkbox']")
+			.prop("checked", flag);
+	}
+	
+	// 删除最一页所有数据后，跳转到上一页
+	function doRefreshPage() {
+		var pageCount = $("#pageId").data("pageCount");
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		var checked=$("#checkAll").prop("checked");
+		if(pageCurrent == pageCount && checked && pageCurrent > 1){
+			pageCurrent--;
+			$("#pageId").data("pageCurrent", pageCurrent);
+		}
+	}
+
+
+</script>
+
+
+
+
+
+

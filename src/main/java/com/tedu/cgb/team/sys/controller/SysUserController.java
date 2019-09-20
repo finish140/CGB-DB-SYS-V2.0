@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tedu.cgb.team.common.entity.User;
 import com.tedu.cgb.team.common.vo.JsonResult;
 import com.tedu.cgb.team.common.vo.Page;
-import com.tedu.cgb.team.sys.service.UserService;
+import com.tedu.cgb.team.sys.service.SysUserService;
 
 @RestController
 @RequestMapping("/sys/user/")
-public class UserController {
+public class SysUserController {
 	@Autowired
-	private UserService userService;
+	private SysUserService userService;
 	
 	@RequestMapping("doFindPageObjects")
 	public JsonResult doFindPageObjects(String username, Integer pageCurrent) {

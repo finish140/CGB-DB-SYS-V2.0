@@ -42,20 +42,15 @@
 		<!--  
 		<table schema="" domainObjectName="CartProduct" tableName="cart_products" />
 		<table schema="" domainObjectName="Cart" tableName="carts" />
-		<table schema="" domainObjectName="Category" tableName="categorys" />
 		<table schema="" domainObjectName="Comment" tableName="comments" />
 		<table schema="" domainObjectName="Logger" tableName="logger" />
 		<table schema="" domainObjectName="Order" tableName="orders" />
 		<table schema="" domainObjectName="User" tableName="users" />
-		-->
 		<table domainObjectName="Product" tableName="products" >
    			 <columnOverride column="context" jdbcType="VARCHAR" property="context" /> 
 		</table>
-		<!-- 自定义字段java类型使用 <table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer"> 
-			<property name="useActualColumnNames" value="true" /> <generatedKey column="ID" 
-			sqlStatement="DB2" identity="true" /> <columnOverride column="DATE_FIELD" 
-			property="startDate" /> <ignoreColumn column="FRED" /> <columnOverride column="LONG_VARCHAR_FIELD" 
-			jdbcType="VARCHAR" /> </table> -->
+		-->
+		<table schema="" domainObjectName="Category" tableName="categorys" />
 
 	</context>
 </generatorConfiguration>
