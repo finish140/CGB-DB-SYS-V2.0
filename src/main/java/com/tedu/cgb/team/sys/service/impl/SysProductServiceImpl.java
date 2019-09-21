@@ -13,11 +13,11 @@ import com.tedu.cgb.team.common.dao.CategoryMapper;
 import com.tedu.cgb.team.common.dao.ProductMapper;
 import com.tedu.cgb.team.common.dao.UserMapper;
 import com.tedu.cgb.team.common.entity.Category;
-import com.tedu.cgb.team.common.entity.CategoryExample;
 import com.tedu.cgb.team.common.entity.Product;
 import com.tedu.cgb.team.common.entity.ProductExample;
 import com.tedu.cgb.team.common.entity.ProductExample.Criteria;
 import com.tedu.cgb.team.common.util.Assert;
+import com.tedu.cgb.team.common.util.ResultValidator;
 import com.tedu.cgb.team.common.vo.Page;
 import com.tedu.cgb.team.sys.service.SysProductService;
 
@@ -26,8 +26,6 @@ public class SysProductServiceImpl implements SysProductService {
 	
 	@Autowired
 	private ProductMapper productMapper;
-	@Autowired
-	private UserMapper userMapper;
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
@@ -56,6 +54,50 @@ public class SysProductServiceImpl implements SysProductService {
 			records.add(map);
 		}
 		return new Page<>(pageCurrent, pageSize, rowCount, records);
+	}
+	
+	@Override
+	public int updateObject(Product product) {
+		Assert.notNull(product, "参数异常，请联系管理员修复");
+		Assert.notZero(product.getId(), "参数异常，请联系管理员修复");
+		isLegalProduct(product);
+		
+		Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
+		if (category == null)
+			throw new IllegalArgumentException("商品分类异常，请刷新页面重试");
+			
+		
+		int rows = productMapper.updateByPrimaryKey(product);
+		ResultValidator.validateResult(rows, "更新失败，请刷新页面重试");
+		return rows;
+	}
+	
+	@Override
+	public Product findObjectById(Integer id) {
+		Assert.notZero(id, "参数异常，请刷新页面重试");
+		Product product = productMapper.selectByPrimaryKey(id);
+		ResultValidator.notNull(product, "参数异常，请刷新页面重试");
+		return product;
+	}
+	
+	@Override
+	public int saveObejct(Product product) {
+		Assert.notNull(product, "参数异常，请联系管理员修复");
+		isLegalProduct(product);
+		
+		int rows = productMapper.insertSelective(product);
+		ResultValidator.validateResult(rows, "保存失败，请刷新页面重试");
+		return rows;
+	}
+	
+	
+	
+	
+	private void isLegalProduct(Product product) {
+		Assert.notBlank(product.getContext(), "请输入商品标题");
+		Assert.notBlank(product.getImg(), "请上传商品图片");
+		Assert.notBlank(product.getPrice(), "请输入商品价格");
+		Assert.notZero(product.getCategoryId(), "请选择商品分类");
 	}
 	
 

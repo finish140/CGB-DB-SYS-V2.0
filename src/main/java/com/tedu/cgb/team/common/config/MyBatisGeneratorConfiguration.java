@@ -23,7 +23,7 @@ public class MyBatisGeneratorConfiguration {
 		   myBatisGenerator.generate(null);
 	}
 	
-	/*
+//	/*
 	public static void main(String[] args) {
 		try {
 			MyBatisGeneratorConfiguration generator = new MyBatisGeneratorConfiguration();
@@ -32,5 +32,5 @@ public class MyBatisGeneratorConfiguration {
 			e.printStackTrace();
 		}
 	}
-	*/
+//	*/
 }

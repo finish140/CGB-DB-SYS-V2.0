@@ -1,0 +1,127 @@
+<!-- Horizontal Form -->
+ <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">添加用户</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form class="form-horizontal">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="usernameId" class="col-sm-2 control-label">商品标题</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="usernameId">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="usernameId" class="col-sm-2 control-label">商品图片</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="usernameId">
+            </div>
+          </div>
+          
+          
+          
+          <div class="form-group" id="pwdDiv">
+            <label for="passwordId" class="col-sm-2 control-label">商品价格</label>
+
+            <div class="col-sm-10">
+              <input type="password" class="form-control"  id="passwordId">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="emailId" class="col-sm-2 control-label">商品分类</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  id="emailId">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="phoneId" class="col-sm-2 control-label">商品描述</label>
+              <div class="col-sm-10">
+              <input type="text" class="form-control"  id="phoneId">
+            </div>
+          </div>
+          
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <button type="button" class="btn btn-default btn-cancel">Cancel</button>
+          <button type="button" class="btn btn-info pull-right btn-save">Save</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+    </div>
+<script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="bower_components/layer/layer.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 doInitFormData();
+	 //事件注册
+	 $(".box-footer")
+	 .on("click",".btn-cancel",doCancel)
+	 .on("click",".btn-save",doSaveOrUpdate);
+ });
+ 
+ function doCancel(){
+	$("#mainContentId").removeData("rowData");
+	$("#mainContentId").load("user/user_list");
+ }
+ function doSaveOrUpdate(){
+	 var rowData=$("#mainContentId").data("rowData");
+	 //1.获取表单数据
+	 var params=doGetEditFormData();
+	 if(rowData)params.id=rowData.id;
+	 //2.发起异步请求
+	 var insertUrl="user/doSaveObject";
+	 var updateUrl="user/doUpdateObject";
+	 var url=rowData?updateUrl:insertUrl;
+	 console.log(params);
+	 $.post(url,params,function(result){
+		 if(result.state==1){
+			 alert(result.message);
+			 doCancel();
+		 }else{
+			alert(result.message);
+		 }
+	 })
+ }
+ function doGetEditFormData(){
+	 //获取用户输入的数据
+	 var params={
+	    username:$("#usernameId").val(),
+	    password:$("#passwordId").val(),
+	    email:$("#emailId").val(),
+	    mobile:$("#phoneId").val(),
+	    role:$(".role-value").val(),
+	 }
+	 return params;
+ }
+ 
+ function doInitFormData(){
+     var data=$("#mainContentId").data("rowData");
+     if(!data)return;
+     $("#pwdDiv").remove();
+	 console.log(data);
+	 //初始化用户信息 
+	 $("#usernameId").val(data.username);
+	 $("#emailId").val(data.email);
+	 $("#phoneId").val(data.mobile);
+	 var role = data.role
+	 console.log(role)
+	 if(role == "卖家"){
+		 $("#seller").attr("checked", 'checked');
+	 }if(role == "买家"){
+		 $("#buyer").attr("checked", 'checked');
+	 }
+ }
+ 
+</script>
+    
+    
+    
+    
+    
+    
+    
