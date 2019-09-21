@@ -1,11 +1,13 @@
 package com.tedu.cgb.team.sys.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tedu.cgb.team.common.entity.Category;
 import com.tedu.cgb.team.common.entity.Product;
 import com.tedu.cgb.team.common.vo.JsonResult;
 import com.tedu.cgb.team.common.vo.Page;
@@ -42,5 +44,10 @@ public class SysProductController {
 		return new JsonResult(product);
 	}
 	
+	@RequestMapping("doGetCategories")
+	public JsonResult doGetCategories() {
+		List<Category> result = productService.getCategories();
+		return new JsonResult(result);
+	}
 	
 }

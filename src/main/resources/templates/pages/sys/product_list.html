@@ -30,6 +30,7 @@
 							<th>商品价格</th>
 							<th>商品分类</th>
 							<th>商品描述</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody id="tbodyId">
@@ -49,6 +50,19 @@
 	// 页面加载完毕后进行一次查询
 	$(function(){
 		$("#pageId").load("doPageUI", doGetObjects());
+		
+		$("#tbodyId")
+			.on("click",".btn-delete",doDeleteObjects)
+			.on("click",".btn-update",doLoadEditUI);
+		
+		// 按钮事件
+		$(".input-group-btn")
+			.on("click", ".btn-search", doQueryObjects)
+			.on("click", ".btn-delete", doDeleteObjects);
+	  	// 全选按钮事件注册
+		$("#checkAll").change(doChangeTBodyCheckBoxState);
+		// 基于tbody中checkbox状态,修改thead中checkbox状态
+		$("#tbodyId").on("change",".cBox",doChangeTHeadCheckBoxState)
 	});
 	
 	// 异步请求服务端的用户行为日志信息
@@ -62,6 +76,35 @@
 		$.getJSON(url, params, function(result) {
 			doHandleResponseResult(result);
 		});
+	}
+	
+	function doLoadEditUI(){
+		var title;
+		if($(this).hasClass('btn-add')){
+			title="添加商品";
+			doLoadPageUI(title);
+		}else{
+			title="编辑商品"
+			var id=$(this).parents("tr").data("id");
+			var params={"id":id};
+			var url="product/doFindObjectById";
+			$.getJSON(url,params,function(result){
+				if(result.state==1){
+					result.data.id=id;//在结果中动态追加id
+					$("#mainContentId").data("data",result.data);
+					doLoadPageUI(title);//异步加载页面  
+				}else{
+					alert(result.message); 
+				}
+			});
+		}
+	}
+	
+	function doLoadPageUI(title){
+		var url="product/product_edit"
+		$("#mainContentId").load(url,function(){
+			$(".box-title").html(title);
+		})
 	}
 	
 	// 查询按钮函数
@@ -107,6 +150,7 @@
 		tBody.empty();
 		for(var i = 0; i < records.length; i++) {
 			var tr = $("<tr></tr>");
+			tr.data("id", records[i].product.id);
 			var tds = doCreateTds(records[i]);
 			tr.append(tds);
 			tBody.append(tr);
@@ -117,24 +161,17 @@
 	
 	// 创建table当前行里的列数据
 	function doCreateTds(data) {
-		var tds = "<td><input type='checkbox' class='cBox' name='cItem' value='" + data.id + "'></td>"
+		var tds = "<td><input type='checkbox' class='cBox' name='cItem' value='" + data.product.id + "'></td>"
 			+ "<td>" +  data.product.id   + "</td>"
 			+ "<td><img src=http://localhost/" + data.product.img + "/></td>"
 			+ "<td>" +  data.product.context  + "</td>"
 			+ "<td>" +  data.product.price  + "</td>"
 			+ "<td>" +  data.categoryTypeName  + "</td>"
-			+ "<td>" +  data.product.decs   + "</td>";	   
+			+ "<td>" +  data.product.decs   + "</td>"
+			+ "<td><a class='btn-update'>编辑</a>"
+		    + "&nbsp;<a class='btn-delete'>删除</a></td>";  
 		return tds;
 	}
-	
-	// 按钮事件
-	$(".input-group-btn")
-		.on("click", ".btn-search", doQueryObjects)
-		.on("click", ".btn-delete", doDeleteObjects);
-  	// 全选按钮事件注册
-	$("#checkAll").change(doChangeTBodyCheckBoxState);
-	// 基于tbody中checkbox状态,修改thead中checkbox状态
-	$("#tbodyId").on("change",".cBox",doChangeTHeadCheckBoxState)
 	
 	// 获取用户选中的id参数数组
 	function doGetCheckedIds() {

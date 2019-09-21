@@ -13,6 +13,7 @@ import com.tedu.cgb.team.common.dao.CategoryMapper;
 import com.tedu.cgb.team.common.dao.ProductMapper;
 import com.tedu.cgb.team.common.dao.UserMapper;
 import com.tedu.cgb.team.common.entity.Category;
+import com.tedu.cgb.team.common.entity.CategoryExample;
 import com.tedu.cgb.team.common.entity.Product;
 import com.tedu.cgb.team.common.entity.ProductExample;
 import com.tedu.cgb.team.common.entity.ProductExample.Criteria;
@@ -64,7 +65,7 @@ public class SysProductServiceImpl implements SysProductService {
 		
 		Category category = categoryMapper.selectByPrimaryKey(product.getCategoryId());
 		if (category == null)
-			throw new IllegalArgumentException("商品分类异常，请刷新页面重试");
+			throw new IllegalArgumentException("商品分类信息异常，请刷新页面重试");
 			
 		
 		int rows = productMapper.updateByPrimaryKey(product);
@@ -90,13 +91,25 @@ public class SysProductServiceImpl implements SysProductService {
 		return rows;
 	}
 	
-	
-	
+	@Override
+	public List<Category> getCategories() {
+		List<Category> records = categoryMapper.selectByExample(new CategoryExample());
+		Assert.noNullElement(records, "商品分类信息异常，请刷新页面重试");
+		return records;
+	}
 	
 	private void isLegalProduct(Product product) {
 		Assert.notBlank(product.getContext(), "请输入商品标题");
-		Assert.notBlank(product.getImg(), "请上传商品图片");
+		product.getContext().trim();
+		Assert.notNull(product.getImg(), "请上传正确的图片格式");
+		Assert.isImg(product.getImg(), "请上传正确的图片格式");
+		product.getImg().trim();
 		Assert.notBlank(product.getPrice(), "请输入商品价格");
+		String price = product.getPrice();
+		if (price.startsWith("¥"))
+			price.substring(1);
+		Assert.isPrice(price, "请输入正确的商品价格");
+		price = "¥" + price;
 		Assert.notZero(product.getCategoryId(), "请选择商品分类");
 	}
 	

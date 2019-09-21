@@ -1,7 +1,9 @@
 package com.tedu.cgb.team.sys.service;
 
+import java.util.List;
 import java.util.Map;
 
+import com.tedu.cgb.team.common.entity.Category;
 import com.tedu.cgb.team.common.entity.Product;
 import com.tedu.cgb.team.common.vo.Page;
 
@@ -34,5 +36,11 @@ public interface SysProductService {
 	 * @param product
 	 */
 	int saveObejct(Product product);
+
+	/**
+	 * 获取所有分类信息
+	 * @return
+	 */
+	List<Category> getCategories();
 
 }

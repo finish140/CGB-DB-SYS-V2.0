@@ -140,13 +140,28 @@ public abstract class Assert {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
-
+	
+	public static void isImg(String jpgUrl, String exceptionMessage) {
+		String regex = "http://(?!(\\.jpg|\\.png)).+?(\\.jpg|\\.png)";
+		if (jpgUrl.matches(regex)) {
+			throw new IllegalArgumentException(exceptionMessage);
+		}
+	}
 
 	public static void noNullElement(Collection<?> collection, String exceptionMessage) {
 		notNull(collection, exceptionMessage);
 		for (Object object : collection) {
 			notNull(object, exceptionMessage);
 		}
+	}
+
+
+	public static void isPrice(String price, String exceptionMessage) {
+		String regex = "(?!^0*(\\.0{1,2})?$)^\\d{1,13}(\\.\\d{1,2})?$";
+		if (price.matches(regex)) {
+			throw new IllegalArgumentException(exceptionMessage);
+		}
+		
 	}
 
 }
