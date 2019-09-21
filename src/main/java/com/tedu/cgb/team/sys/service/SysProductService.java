@@ -10,12 +10,12 @@ import com.tedu.cgb.team.common.vo.Page;
 public interface SysProductService {
 	
 	/**
-	 * 根据context字段查找数据并封装到Page对象，
-	 * 当context为null或空串时查询所有记录
+	 * 根据context和categoryId字段查找数据并封装到Page对象，
+	 * 字段值可以为null，null值时不作为查询条件进行查询
 	 * @param name
 	 * @return
 	 */
-	Page<Map<String, Object>> findPage(String context, Integer pageCurrent);
+	Page<Map<String, Object>> findPage(String context, Integer categoryId, Integer pageCurrent);
 
 	/**
 	 * 根据product的id属性更新数据库对应的记录
@@ -42,5 +42,13 @@ public interface SysProductService {
 	 * @return
 	 */
 	List<Category> getCategories();
+
+	/**
+	 * 根据一个或多个id删除对应的记录
+	 * @param ids
+	 * @return
+	 */
+	int deleteObjectsByIds(Integer[] ids);
+
 
 }

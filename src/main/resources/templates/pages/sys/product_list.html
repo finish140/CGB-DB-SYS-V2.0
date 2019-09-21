@@ -6,14 +6,19 @@
 
 				<div class="box-tools">
 					<div class="input-group input-group-sm" style="width: 350px;">
+						
 						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="用户名">
+							class="form-control pull-right" placeholder="商品标题"/>
 
 						<div class="input-group-btn">
+							<select class="btn btn-default" id="categorySelectId" onchange="doGetObjects()">
+							</select>
+						
+						
 							<button type="button" class="btn btn-default btn-search">
                                 <i class="fa fa-search"></i>
 							</button>
-							<button type="button" class="btn btn-default btn-delete">删除</button>
+							<button type="button" class="btn btn-default btn-delete">批量删除</button>
 						</div>
 					</div>
 				</div>
@@ -49,6 +54,7 @@
 
 	// 页面加载完毕后进行一次查询
 	$(function(){
+		doInitCategory();
 		$("#pageId").load("doPageUI", doGetObjects());
 		
 		$("#tbodyId")
@@ -59,6 +65,7 @@
 		$(".input-group-btn")
 			.on("click", ".btn-search", doQueryObjects)
 			.on("click", ".btn-delete", doDeleteObjects);
+			
 	  	// 全选按钮事件注册
 		$("#checkAll").change(doChangeTBodyCheckBoxState);
 		// 基于tbody中checkbox状态,修改thead中checkbox状态
@@ -69,10 +76,16 @@
 	function doGetObjects(){
 		var url = "product/doFindPage";
 		var pageCurrent = $("#pageId").data("pageCurrent");
-		if(!pageCurrent) pageCurrent = 1;
-			var params = {"pageCurrent" : pageCurrent};
+		if(!pageCurrent) 
+			pageCurrent = 1;
+		var params = {"pageCurrent" : pageCurrent};
+		
+		var categoryId = $("#categorySelectId option:selected").val();
+		if(categoryId) 
+			params.categoryId = categoryId;
 		var context = $("#searchNameId").val();
-		   if(context) params.context = context; // 查询时需要
+		if(context) 
+			params.context = context; // 查询时需要
 		$.getJSON(url, params, function(result) {
 			doHandleResponseResult(result);
 		});
@@ -113,15 +126,22 @@
 		doGetObjects();
 	}
 	
+	  
 	// 删除按钮函数
 	function doDeleteObjects() {
-		var ids = doGetCheckedIds();
+		var id=$(this).parents("tr").data("id");
+		if(id){
+			var params={"ids":id};
+		}else{
+			var ids = doGetCheckedIds();
 			if(ids.length == 0) {
 				alert("至少选择一个");
 				return;
 			}
-		var url = "log/doDeleteByIds";
-		var params = {"ids" : ids.toString()};
+			var params = {"ids" : ids.toString()};
+		}
+		
+		var url = "product/doDeleteByIds";
 		if(!confirm('确定要删除吗')) return;
 		$.post(url, params, function(result) {
 			if(result.state == 1) {
@@ -168,8 +188,8 @@
 			+ "<td>" +  data.product.price  + "</td>"
 			+ "<td>" +  data.categoryTypeName  + "</td>"
 			+ "<td>" +  data.product.decs   + "</td>"
-			+ "<td><a class='btn-update'>编辑</a>"
-		    + "&nbsp;<a class='btn-delete'>删除</a></td>";  
+			+ "<td><a class='btn-update' style='cursor: pointer'>编辑</a>"
+		    + "&nbsp;<a class='btn-delete' style='cursor: pointer'>删除</a></td>";  
 		return tds;
 	}
 	
@@ -213,7 +233,26 @@
 		}
 	}
 
+	
+	function doInitCategory(){
+		var url = "product/doGetCategories";
+		 $.getJSON(url, function(result){
+			 doGetCategories(result.data);
+		 });
+	}
 
+	 function doGetCategories(categories){
+		 var option = "<option value='0'>商品类别</option>";
+		 $("#categorySelectId").append(option);
+	     for(var i = 0; i < categories.length; i++) {
+	    	 var option = "<option value=" + categories[i].id + ">" 
+	    	 			  +  categories[i].typeName   + "</option>";
+	    	 $("#categorySelectId").append(option);
+	     }
+	 }
+	
+	
+	
 </script>
 
 

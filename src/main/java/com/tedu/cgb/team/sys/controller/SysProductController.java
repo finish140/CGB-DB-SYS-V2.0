@@ -21,8 +21,8 @@ public class SysProductController {
 	private SysProductService productService;
 	
 	@RequestMapping("doFindPage")
-	public JsonResult doFindPage(String context, Integer pageCurrent) {
-		Page<Map<String, Object>> page = productService.findPage(context, pageCurrent);
+	public JsonResult doFindPage(String context, Integer categoryId, Integer pageCurrent) {
+		Page<Map<String, Object>> page = productService.findPage(context, categoryId, pageCurrent);
 		return new JsonResult(page);
 	}
 	
@@ -32,7 +32,7 @@ public class SysProductController {
 		return new JsonResult("修改成功");
 	}
 	
-	@RequestMapping("doSaveObject")
+//	@RequestMapping("doSaveObject")
 	public JsonResult doSaveObject(Product product) {
 		productService.saveObejct(product);
 		return new JsonResult("保存成功");
@@ -49,5 +49,16 @@ public class SysProductController {
 		List<Category> result = productService.getCategories();
 		return new JsonResult(result);
 	}
+	
+	@RequestMapping("doDeleteByIds")
+	public JsonResult doDeleteObjectsByIds(Integer... ids) {
+		productService.deleteObjectsByIds(ids);
+		return new JsonResult("删除成功");
+	}
+//	@RequestMapping("doUploadImg")
+//	public JsonResult doUploadImg(String img) {
+//		String newImgUrl = productService.updateImg(img);
+//		return new JsonResult(newImgUrl);
+//	}
 	
 }

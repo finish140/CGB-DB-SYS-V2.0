@@ -15,10 +15,11 @@
             </div>
           </div>
           
-          <div class="form-group" id="imgDivId">
+          <div class="form-group">
             <label for="imgId" class="col-sm-2 control-label">商品图片</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="imgId">
+            <div class="col-sm-10" id="imgDivId">
+            	<div id="imgId"></div>
+            	<div id="imgBtnId"></div>
             </div>
           </div>
           
@@ -65,7 +66,8 @@
 	 //事件注册
 	 $(".box-footer")
 	 .on("click",".btn-cancel",doCancel)
-	 .on("click",".btn-save",doSaveOrUpdate);
+	 .on("click",".btn-save",doSaveOrUpdate)
+	 .on("click",".btn-uploadImg",doUploadImg);
  });
  
  function doCancel(){
@@ -73,15 +75,15 @@
 	$("#mainContentId").load("product/product_list");
  }
  function doSaveOrUpdate(){
-	 var rowData=$("#mainContentId").data("rowData");
+	 var rowData=$("#mainContentId").data("data");
 	 //1.获取表单数据
 	 var params=doGetEditFormData();
 	 if(rowData)params.id=rowData.id;
+	 console.log(params.img);
 	 //2.发起异步请求
 	 var insertUrl="product/doSaveObject";
 	 var updateUrl="product/doUpdateObject";
 	 var url=rowData?updateUrl:insertUrl;
-	 console.log(params);
 	 $.post(url,params,function(result){
 		 if(result.state==1){
 			 alert(result.message);
@@ -91,16 +93,35 @@
 		 }
 	 })
  }
+ function doUploadImg(){
+	 var rowData=$("#mainContentId").data("data");
+	 var params=doGetEditFormData();
+	 if(rowData)params.id=rowData.id;
+	 
+	 var url = "product/doUploadImg";
+	 $.post(url, params.id, function(result){
+		 if(result.state==1){
+			 $("#imgId").remove();
+			 var img = "<img height='200px' src=http://localhost/" + result.data + "/>"
+			 $("#imgId").append(img);
+		 }else{
+			alert(result.message);
+		 }
+	 });
+ }
+ 
+ 
+ 
+ 
  function doGetEditFormData(){
 	 //获取用户输入的数据
 	 var params={
 		 context:$("#contextId").val(),
-		 img:$("#imgId").val(),
+		 img:$("#imgId img").attr("src"),
 		 price:$("#priceId").val(),
-		 category:$("#categoryId").val(),
+		 categoryId:$("#categoryId").val(),
 		 decs:$("#decsId").val(),
 	 }
-	 console.log(params);
 	 return params;
  }
  
@@ -110,7 +131,11 @@
      
 	 //初始化用户信息 
 	 $("#contextId").val(data.context);
-	 $("#imgId").val(data.img);
+	 var img = "<img height='200px' src=http://localhost/" + data.img + "/>";
+	 var button = "<button type='button' class='btn btn-default btn-uploadImg'>"
+	       		  + "上传图片</button>";
+	 $("#imgBtnId").append(button);
+	 $("#imgId").append(img);
 	 $("#priceId").val(data.price);
 	 $("#decsId").val(data.decs);
  }
@@ -125,9 +150,12 @@
  function doInitCategoryData(categories){
 	 var data=$("#mainContentId").data("data");
      if(!data)return;
-     var categoriyTypeName;
      for(var i = 0; i < categories.length; i++) {
-    	 var option = "<option value=" + categories[i].id + ">" +  categories[i].typeName   + "</option>"; 
+    	 var selected = "";
+    	 if(categories[i].id == data.categoryId)
+    	 	selected = "selected='selected'";
+    	 var option = "<option value=" + categories[i].id + " "+ selected + ">" 
+    	 			  +  categories[i].typeName   + "</option>";
     	 $("#categoryId").append(option);
      }
  }

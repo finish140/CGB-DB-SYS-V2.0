@@ -82,14 +82,15 @@
     });
     $(".btn").click(doLogin);
   });
+  
   function doLogin(){
-	  var params={
+	  var params = {
 		 username:$("#usernameId").val(),
 		 password:$("#passwordId").val(),
 		 isRememberMe:$("#rememberId").prop("checked"),
 	  }
 	  var url="user/doLogin";
-	  console.log("params",params);
+	  
 	  $.post(url,params,function(result){
 		  if(result.state==1){
 			//跳转到indexUI对应的页面

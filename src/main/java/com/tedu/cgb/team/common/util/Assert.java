@@ -154,6 +154,13 @@ public abstract class Assert {
 			notNull(object, exceptionMessage);
 		}
 	}
+	
+	public static void noNullElement(Object[] array, String exceptionMessage) {
+		notNull(array, exceptionMessage);
+		for (Object object : array) {
+			notNull(object, exceptionMessage);
+		}
+	}
 
 
 	public static void isPrice(String price, String exceptionMessage) {
