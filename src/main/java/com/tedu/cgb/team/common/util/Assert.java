@@ -136,14 +136,14 @@ public abstract class Assert {
 	public static void isEmail(String email, String exceptionMessage) {
 		notBlank(email, exceptionMessage);
 		String regex = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
-		if (email.matches(regex)) {
+		if (!email.matches(regex)) {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
 	
 	public static void isImg(String jpgUrl, String exceptionMessage) {
 		String regex = "http://(?!(\\.jpg|\\.png)).+?(\\.jpg|\\.png)";
-		if (jpgUrl.matches(regex)) {
+		if (!jpgUrl.matches(regex)) {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
 	}
@@ -165,7 +165,7 @@ public abstract class Assert {
 
 	public static void isPrice(String price, String exceptionMessage) {
 		String regex = "(?!^0*(\\.0{1,2})?$)^\\d{1,13}(\\.\\d{1,2})?$";
-		if (price.matches(regex)) {
+		if (!price.matches(regex)) {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
 		
