@@ -142,7 +142,7 @@ public abstract class Assert {
 	}
 	
 	public static void isImg(String jpgUrl, String exceptionMessage) {
-		String regex = "http://(?!(\\.jpg|\\.png)).+?(\\.jpg|\\.png)";
+		String regex = "(https?:\\/\\/)?([\\da-z\\.\\/-]+)\\.(jpg|bmp|gif|jpeg|png)?/*";
 		if (!jpgUrl.matches(regex)) {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
@@ -162,13 +162,16 @@ public abstract class Assert {
 		}
 	}
 
-
+	
 	public static void isPrice(String price, String exceptionMessage) {
+		notBlank(price, exceptionMessage);
+		if (price.startsWith("¥"))
+			price = price.substring(1);
 		String regex = "(?!^0*(\\.0{1,2})?$)^\\d{1,13}(\\.\\d{1,2})?$";
 		if (!price.matches(regex)) {
 			throw new IllegalArgumentException(exceptionMessage);
 		}
-		
+		price = "¥" + price;
 	}
 
 }

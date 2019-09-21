@@ -71,10 +71,11 @@ public class SysOrderServiceImpl implements SysOrderService {
 			// 根据单个订单号查询对应的多个产品
 			orderProductExample.clear();
 			orderProductCriteria.andOrderIdEqualTo(order.getId());
-			List<OrderProduct> orderProducts = orderProductMapper.selectByExample(orderProductExample);
+			List<OrderProduct> orderProducts = 
+					orderProductMapper.selectByExample(orderProductExample);
 			Assert.noNullElement(orderProducts, "订单信息异常，请联系管理员修复");
 			
-			// 将查询结果拆成产品id列表
+			// 将查询结果转为产品id列表
 			List<Integer> orderProductIds = new LinkedList<>();
 			for (OrderProduct orderProduct : orderProducts) {
 				orderProductIds.add(orderProduct.getProductId());

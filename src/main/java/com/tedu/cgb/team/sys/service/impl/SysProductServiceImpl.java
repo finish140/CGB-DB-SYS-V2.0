@@ -124,17 +124,11 @@ public class SysProductServiceImpl implements SysProductService {
 		// 验证图片
 		Assert.notNull(product.getImg(), "请上传图片");
 		product.setImg(product.getImg().trim());
-		Assert.isImg(product.getImg(), "请上传正图片格式的文件（jpg、png）");
 		if (product.getImg().startsWith("http://localhost/")) {
 			product.setImg(product.getImg().substring(17));
 		}
 		// 验证价格
-		Assert.notBlank(product.getPrice(), "请输入商品价格");
-		String price = product.getPrice();
-		if (price.startsWith("¥"))
-			price.substring(1);
-		Assert.isPrice(price, "请输入正确的商品价格");
-		price = "¥" + price;
+		Assert.isPrice(product.getPrice(), "请输入正确的商品价格");
 		
 		Assert.notZero(product.getCategoryId(), "请选择商品分类");
 	}
