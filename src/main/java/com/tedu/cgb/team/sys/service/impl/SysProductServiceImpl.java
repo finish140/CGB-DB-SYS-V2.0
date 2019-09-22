@@ -31,6 +31,8 @@ public class SysProductServiceImpl implements SysProductService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
+	private static final int DEFAULT_PAGE_SIZE = 10;
+	
 	@Override
 	public Page<Map<String, Object>> findPage(String context, Integer categoryId, Integer pageCurrent) {
 		Assert.notZero(pageCurrent, "页码错误，请刷新重试");
@@ -45,7 +47,7 @@ public class SysProductServiceImpl implements SysProductService {
 		int rowCount = productMapper.countByExample(productExample);
 		Assert.notZero(rowCount, "没有相对应的记录");
 		
-		int pageSize = 10;
+		int pageSize = DEFAULT_PAGE_SIZE;
 		PageHelper.startPage(pageCurrent, pageSize);
 		
 		List<Product> products = productMapper.selectByExample(productExample);

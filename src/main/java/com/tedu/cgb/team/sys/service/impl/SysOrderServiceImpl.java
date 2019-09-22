@@ -12,13 +12,14 @@ import com.github.pagehelper.PageHelper;
 import com.tedu.cgb.team.common.dao.OrderMapper;
 import com.tedu.cgb.team.common.dao.OrderProductMapper;
 import com.tedu.cgb.team.common.dao.ProductMapper;
+import com.tedu.cgb.team.common.dao.UserMapper;
 import com.tedu.cgb.team.common.entity.Order;
 import com.tedu.cgb.team.common.entity.OrderExample;
 import com.tedu.cgb.team.common.entity.OrderProduct;
 import com.tedu.cgb.team.common.entity.OrderProductExample;
-import com.tedu.cgb.team.common.entity.OrderProductExample.Criteria;
 import com.tedu.cgb.team.common.entity.Product;
 import com.tedu.cgb.team.common.entity.ProductExample;
+import com.tedu.cgb.team.common.entity.User;
 import com.tedu.cgb.team.common.util.Assert;
 import com.tedu.cgb.team.common.util.ResultValidator;
 import com.tedu.cgb.team.common.vo.Page;
@@ -32,10 +33,15 @@ public class SysOrderServiceImpl implements SysOrderService {
 	private ProductMapper productMapper;
 	@Autowired
 	private OrderProductMapper orderProductMapper;
+	@Autowired
+	private UserMapper userMapper;
+	
 	private static final Integer DEFAULT_PAGE_SIZE = 10;
+	
 	
 	@Override
 	public Page<Map<String, Object>> findPage(Integer pageCurrent) {
+		pageCurrent = 1;
 		Assert.notZero(pageCurrent, "当前页码错误，请刷新页面重试");
 		
 		OrderExample orderExample = new OrderExample();
@@ -63,14 +69,13 @@ public class SysOrderServiceImpl implements SysOrderService {
 		// 准备查询需要的对象
 		OrderProductExample orderProductExample = new OrderProductExample();
 		ProductExample productExample = new ProductExample();
-		ProductExample.Criteria productCriteria = productExample.createCriteria();
-		Criteria orderProductCriteria = orderProductExample.createCriteria();
 		
 		List<Map<String, Object>> records = new LinkedList<>();
 		for (Order order : orders) {
 			// 根据单个订单号查询对应的多个产品
 			orderProductExample.clear();
-			orderProductCriteria.andOrderIdEqualTo(order.getId());
+			orderProductExample.createCriteria()
+			.andOrderIdEqualTo(order.getId());
 			List<OrderProduct> orderProducts = 
 					orderProductMapper.selectByExample(orderProductExample);
 			Assert.noNullElement(orderProducts, "订单信息异常，请联系管理员修复");
@@ -80,16 +85,19 @@ public class SysOrderServiceImpl implements SysOrderService {
 			for (OrderProduct orderProduct : orderProducts) {
 				orderProductIds.add(orderProduct.getProductId());
 			}
-			
 			// 根据产品id列表查询对应的产品信息
 			productExample.clear();
-			productCriteria.andIdIn(orderProductIds);
+			productExample.createCriteria()
+			.andIdIn(orderProductIds);
 			List<Product> products = productMapper.selectByExample(productExample);
 			
+			User user = userMapper.selectByPrimaryKey(order.getUserid());
+			Assert.notNull(user, "订单信息异常，请联系管理员修复");
 			// 将订单信息和产品信息封装到Map中，并加在最终查询结果的单条记录中
 			Map<String, Object> map = new HashMap<>();
 			map.put("order", order);
 			map.put("products", products);
+			map.put("user", user);
 			records.add(map);
 		}
 		return records;
