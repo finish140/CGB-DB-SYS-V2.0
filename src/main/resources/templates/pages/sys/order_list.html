@@ -6,13 +6,8 @@
 
 				<div class="box-tools">
 					<div class="input-group input-group-sm" style="width: 350px;">
-
-						<input type="text" name="table_search" id="searchNameId"
-							class="form-control pull-right" placeholder="商品标题" />
-
 						<div class="input-group-btn">
-
-							<button type="button" class="btn btn-default btn-delete">批量删除</button>
+							<button type="button" class="btn btn-default btn-delete pull-right">批量删除</button>
 						</div>
 					</div>
 				</div>
@@ -20,8 +15,8 @@
 			<!-- /.box-header -->
 			<div class="box-body table-responsive no-padding">
 				<table id="tableId" class="table table-hover">
-					<thead>
-						<tr>
+						<tr id="head">
+							<th><input width="3%" type="checkbox" id="checkAll"></th>
 							<th>订单号</th>
 							<th>买家</th>
 							<th>下单日期</th>
@@ -30,10 +25,8 @@
 							<th>收货地址</th>
 							<th>确认收货日期</th>
 							<th>订单状态</th>
+							<th>操作</th>
 						</tr>
-					</thead>
-					<tbody id="tbodyId">
-					</tbody>
 				</table>
 			</div>
 			<div id="pageId" class="box-footer clearfix"></div>
@@ -50,24 +43,23 @@
 	// 页面加载完毕后进行一次查询
 	$(function() {
 		$("#pageId").load("doPageUI", doGetObjects());
-
-		$("#tbodyId")
+		$("#tableId")
 		.on("click", ".btn-delete", doDeleteObjects)
-		.on("click", ".btn-update", doLoadEditUI);
+		.on("click", ".btn-update", doLoadEditUI)
+		.on("click", ".btn-remove", doRemoveProduct)
+		.on("click", ".btn-updateTotal", doUpdateTotal);
 
 		// 按钮事件
 		$(".input-group-btn")
-		.on("click", ".btn-search", doQueryObjects)
 		.on("click", ".btn-delete", doDeleteObjects);
 
 		// 全选按钮事件注册
 		$("#checkAll").change(doChangeTBodyCheckBoxState);
 		// 基于tbody中checkbox状态,修改thead中checkbox状态
-	//	$("#tbodyId").on("change", ".cBox", doChangeTHeadCheckBoxState)
+		$("#tableId.body").on("change", ".cBox", doChangeTHeadCheckBoxState)
 	});
 	
 	function doGetObjects() {
-		$("#mainContentId").removeData();
 		var url = "order/doFindPage";
 		var pageCurrent = $("#pageId").data("pageCurrent");
 		if (!pageCurrent)
@@ -110,30 +102,20 @@
 		})
 	}
 
-	// 查询按钮函数
-	function doQueryObjects() {
-		$("#pageId").data("pageCurrent", 1);
-		doGetObjects();
-	}
-
 	// 删除按钮函数
 	function doDeleteObjects() {
 		var id = $(this).parents("tr").data("id");
+		
 		if (id) {
-			var params = {
-				"ids" : id
-			};
+			var params = {"ids" : id};
 		} else {
 			var ids = doGetCheckedIds();
 			if (ids.length == 0) {
 				alert("至少选择一个");
 				return;
 			}
-			var params = {
-				"ids" : ids.toString()
-			};
+			var params = {"ids" : ids.toString()};
 		}
-
 		var url = "order/doDeleteByIds";
 		if (!confirm('确定要删除吗'))
 			return;
@@ -147,12 +129,57 @@
 			}
 		});
 	}
+	
+	function doUpdateTotal(){
+		var orderId = $(this).parent().parent().parent().parent().parent().data("id");
+		var productId = $(this).parent().parent().data("id");
+		var total = prompt("请输入要修改的数量");
+		var params = {
+				"orderId" : orderId,
+				"productId" : productId,
+				"total" : total,
+				};
+		var url = "order/doUpdateTotal";
+		
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				doGetObjects();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+	
+	function doRemoveProduct(){
+		var orderId = $(this).parent().parent().parent().parent().parent().data("id");
+		var productId = $(this).parent().parent().data("id");
+		var params = {
+				"orderId" : orderId,
+				"productId" : productId,
+				};
+		
+		var url = "order/doRemoveProduct";
+		if (!confirm('如果产品移除后订单不再含有产品，订单也会连同一起删除\n\n确定要移除吗？'))
+			return;
+		
+		$.post(url, params, function(result) {
+			if (result.state == 1) {
+				alert(result.message);
+				doGetObjects();
+			} else {
+				alert(result.message);
+			}
+		});
+	}
 
 	// 解析Json对象，获取result里封装的Page对象的records的数据并显示
 	function doHandleResponseResult(result) {
 		if (result.state == 1) {
+			var tBody = $("th").parent().siblings();
+			tBody.remove();
 			doSetTableBodyRow(result.data.records);
-//			$('#tableId').treegrid();
+			var treegrid = $('#tableId').treegrid().treegrid("collapseAll");
 			doSetPagination(result.data);
 		} else {
 			alert(result.message);
@@ -161,24 +188,17 @@
 
 	// 更新table里的数据
 	function doSetTableBodyRow(records) {
-		var tBody = $("#tbodyId");
-		tBody.empty();
+		var tb = $("#tableId");
 		for (var i = 0; i < records.length; i++) {
-			console.log(records);
-			var tr = $("<tr></tr>");
+			var tr = $("<tr class='body treegrid-" + i + "'></tr>");
 			tr.data("id", records[i].order.id);
 			var tds = doCreateTds(records[i]);
-			var productsTr = doCreateProductsTable(records[i].products);
+			var productsTr = doCreateProductsTable(records[i].products, i);
+			productsTr.data("id", records[i].order.id);
 			tr.append(tds);
-//			tBody.append(productsTr);
-			tBody.append(tr);
+			tb.append(tr);
+			tb.append(productsTr);
 		}
-		$("#tableId img").css("height", "70px");
-		$("td").css("vertical-align", "middle");
-	}
-
-	function doTreeAction() {
-		$(this).siblings(".productTableCls").toggle();
 	}
 
 	// 创建table当前行里的列数据
@@ -194,70 +214,76 @@
 			state = "待评价";
 		if (state == 4)
 			state = "交易完成";
-
-		var tds = "<td><input type='checkbox' class='cBox' name='cItem' value='" + data.order.id + "'></td>"
-				+ "<td>"
-				+ data.order.id
-				+ "</td>"
-				+ "<td>"
-				+ data.user.username
-				+ "</td>"
-				+ "<td>"
-				+ new Date(data.order.creationDate).toLocaleString()
-				+ "</td>"
-				+ "<td>"
-				+ new Date(data.order.payDate).toLocaleString()
-				+ "</td>"
-				+ "<td>"
-				+ new Date(data.order.deliveryDate).toLocaleString()
-				+ "</td>"
-				+ "<td>"
-				+ data.order.address
-				+ "</td>"
-				+ "<td>"
-				+ new Date(data.order.confirmDate).toLocaleString()
-				+ "</td>"
-				+ "<td>"
-				+ state
-				+ "</td>"
+		
+		var payDate = "-";
+		var deliveryDate = "-";
+		var confirmDate = "-";
+		if(data.order.payDate)
+			payDate = new Date(data.order.payDate).toLocaleString();
+		if(data.order.deliveryDate)
+			deliveryDate = new Date(data.order.deliveryDate).toLocaleString();
+		if(data.order.confirmDate)
+			confirmDate = new Date(data.order.confirmDate).toLocaleString();
+		
+		var tds = "<td><input onchange='doChangeTHeadCheckBoxState()' type='checkbox' class='cBox' name='cItem' value='" + data.order.id + "'></td>"
+				+ "<td>" + data.order.id + "</td>"
+				+ "<td>" + data.user.username + "</td>"
+				+ "<td>" + new Date(data.order.creationDate).toLocaleString() + "</td>"
+				+ "<td>" + payDate + "</td>"
+				+ "<td>" + deliveryDate + "</td>"
+				+ "<td>" + data.order.address + "</td>"
+				+ "<td>" + confirmDate + "</td>"
+				+ "<td>" + state + "</td>"
 				+ "<td><a class='btn-update' style='cursor: pointer'>编辑</a>"
 				+ "&nbsp;<a class='btn-delete' style='cursor: pointer'>删除</a></td>";
 		return tds;
 	}
 
-	function doCreateProductsTable(products) {
-		var trP = $("<tr></tr>")
-		var td = $("<td></td>")
-		var tb = $("<table class='table table-hover id='productsTb'></table>");
+	function doCreateProductsTable(products, n) {
+		var trP = $("<tr class='treegrid-parent-" + n + "'></tr>")
+		var td = $("<td colspan='10'></td>")
+		var tb = $("<table width='100%'></table>");
 		var trC = $("<tr></tr>");
-		var ths = "<th>商品编号</th>" + "<th>商品图片</th>" + "<th>商品标题</th>"
-				+ "<th>商品价格</th>" + "<th>商品分类</th>";
+		var ths = "<th width='6%'></th>" 
+					+ "<th width='5%'>编号</th>" 
+					+ "<th width='8%'>商品图片</th>" 
+					+ "<th width='40%'>商品标题</th>"
+				    + "<th width='10%'>&nbsp;&nbsp;&nbsp;商品价格</th>" 
+				    + "<th width='10%'>商品类别</th>"
+				    + "<th width='10%'>商品数量</th>"
+				    + "<th width='10%'>操作</th>";
 		trC.append(ths);
 		tb.append(trC);
 
 		var productTr;
 		for (i = 0; i < products.length; i++) {
 			var productTr = doCreateProductTr(products[i]);
+			productTr.data("id", products[i].id);
+			if (productTr)
+				tb.append(productTr);
 		}
-		if (productTr)
-			tb.append(productTr);
-		trP.append(tb);
+		td.append(tb);
+		trP.append(td);
 		return trP;
 	}
 
 	function doCreateProductTr(product) {
-		var tr = $("<tr></tr>");
-		var tds = "<th>" + product.id + "</th>" + "<th>" + product.img
-				+ "</th>" + "<th>" + product.context + "</th>" + "<th>"
-				+ product.price + "</th>" + "<th>" + product.categoryId
-				+ "</th>";
+		var tr = $("<tr height='70px'></tr>");
+		var tds = "<td></td><td>" + product.id + "</td>"
+					+ "<td><img style='height: 50px;width: 50px;' src=http://localhost/" + product.img + "/></td>" 
+					+ "<td>" + product.context + "</td>" 
+					+ "<td>&nbsp;&nbsp;&nbsp;" + product.price + "</td>" 
+					+ "<td>" + product.typeName + "</td>"
+					+ "<td>" + product.total + "&nbsp;&nbsp;<a class='btn-updateTotal' style='cursor: pointer'>修改数量</a></td>"
+					+ "<td><a class='btn-remove' style='cursor: pointer'>移除</a></td>";
 		tr.append(tds);
 		return tr;
 	}
+	
 	// 获取用户选中的id参数数组
 	function doGetCheckedIds() {
 		var array = []; // new Array();
-		$("#tbodyId input[type=checkbox]").each(function() {
+		$("#tableId input[type=checkbox]").each(function() {
 			if ($(this).prop("checked")) {
 				array.push($(this).val());
 			}
@@ -268,8 +294,10 @@
 	// 检查.thead的全选框，并执行全选/全不选操作
 	function doChangeTHeadCheckBoxState() {
 		var flag = true;
-		$("#tbodyId input[type='checkbox']").each(function() {
-			flag = flag && $(this).prop("checked")
+		$("#tableId input[type='checkbox']").each(function() {
+			if($(this).index() != $("#checkAll").index()) {
+				flag = flag && $(this).prop("checked")
+			}
 		});
 		$("#checkAll").prop("checked", flag);
 	}
@@ -277,7 +305,7 @@
 	// 检查.tbody的全选框，并执行全选/全不选操作
 	function doChangeTBodyCheckBoxState() {
 		var flag = $(this).prop("checked"); // true or false
-		$("#tbodyId input[type='checkbox']").prop("checked", flag);
+		$("#tableId input[type='checkbox']").prop("checked", flag);
 	}
 
 	// 删除最一页所有数据后，跳转到上一页

@@ -21,4 +21,22 @@ public class SysOrderController {
 		Page<Map<String, Object>> result = orderService.findPage(pageCurrent);
 		return new JsonResult(result);
 	}
+	
+	@RequestMapping("doDeleteByIds")
+	public JsonResult doDeleteByIds(Integer... ids) {
+		orderService.deleteObjectsByIds(ids);
+		return new JsonResult("删除成功");
+	}
+	
+	@RequestMapping("doRemoveProduct")
+	public JsonResult doRemoveProduct(Integer orderId, Integer productId) {
+		orderService.removeProduct(orderId, productId);
+		return new JsonResult("移除成功");
+	}
+	
+	@RequestMapping("doUpdateTotal")
+	public JsonResult doUpdateTotal(Integer orderId, Integer productId, Integer total) {
+		orderService.updateTotal(orderId, productId, total);
+		return new JsonResult("修改成功");
+	}
 }

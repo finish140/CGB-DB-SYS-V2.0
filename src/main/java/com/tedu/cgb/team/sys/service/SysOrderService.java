@@ -14,4 +14,26 @@ public interface SysOrderService {
 	 */
 	Page<Map<String, Object>> findPage(Integer pageCurrent);
 
+	/**
+	 * 根据单个或多个订单id删除数据和关系表数据
+	 * @param ids
+	 * @return
+	 */
+	int deleteObjectsByIds(Integer[] ids);
+
+	/**
+	 * 根据订单id删除关系表的对应产品id，
+	 * 如果订单不再与产品有关系数据，删除此订单数据
+	 * @param id
+	 * @return
+	 */
+	int removeProduct(Integer orderId, Integer productId);
+
+	/**
+	 * 根据订单id和产品id修改对应的产品数量，
+	 * @param id
+	 * @return
+	 */
+	int updateTotal(Integer orderId, Integer productId, Integer total);
+
 }
