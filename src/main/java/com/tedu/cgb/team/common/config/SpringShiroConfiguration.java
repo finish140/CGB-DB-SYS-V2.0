@@ -22,10 +22,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-//@Configuration
+@Configuration
 public class SpringShiroConfiguration {
 	
-//	@Bean
+	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(
 			@Autowired SecurityManager securityManager) {
 		// 构建bean对象，通过此对象创建过滤器工厂

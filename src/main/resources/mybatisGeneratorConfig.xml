@@ -18,8 +18,6 @@
 			userId="root"
 			password="root">
 		</jdbcConnection>
-	
-
 
 		<javaModelGenerator
 			targetPackage="com.tedu.cgb.team.common.entity"
@@ -40,17 +38,17 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!--  
-		<table schema="" domainObjectName="Category" tableName="categorys" />
-		<table schema="" domainObjectName="User" tableName="users" />
-		<table domainObjectName="Product" tableName="products" >
-   			 <columnOverride column="context" jdbcType="VARCHAR" property="context" /> 
-		</table>
 		-->
 		<table schema="" domainObjectName="OrderProduct" tableName="order_products" />
-		<table schema="" domainObjectName="Cart" tableName="carts" />
-		<table schema="" domainObjectName="Comment" tableName="comments" />
-		<table schema="" domainObjectName="Logger" tableName="logger" />
-		<table schema="" domainObjectName="Order" tableName="orders" />
+		<table schema="" domainObjectName="Cart" 		 tableName="carts" />
+		<table schema="" domainObjectName="Comment" 	 tableName="comments" />
+		<table schema="" domainObjectName="Logger" 	     tableName="logger" />
+		<table schema="" domainObjectName="Order" 	     tableName="orders" />
+		<table schema="" domainObjectName="Category"     tableName="categorys" />
+		<table schema="" domainObjectName="User" 		 tableName="users" />
+		<table schema="" domainObjectName="Product"      tableName="products" >
+   			 <columnOverride column="context" jdbcType="VARCHAR" property="context" /> 
+		</table>
 
 	</context>
 </generatorConfiguration>

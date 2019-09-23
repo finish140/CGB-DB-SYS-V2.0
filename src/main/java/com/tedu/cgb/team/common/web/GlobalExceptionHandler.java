@@ -21,7 +21,7 @@ import com.tedu.cgb.team.common.vo.JsonResult;
  *
  */
 
-//@RestControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 	
 	/**

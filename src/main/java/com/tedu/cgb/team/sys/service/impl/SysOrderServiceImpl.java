@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
+import com.tedu.cgb.team.common.annotation.OperationLogger;
 import com.tedu.cgb.team.common.dao.OrderMapper;
 import com.tedu.cgb.team.common.dao.OrderProductMapper;
 import com.tedu.cgb.team.common.dao.ProductMapper;
@@ -59,6 +60,7 @@ public class SysOrderServiceImpl implements SysOrderService {
 		return new Page<>(pageCurrent, pageSize, rowCount, records);
 	}
 	
+	@OperationLogger("删除订单")
 	@Override
 	public int deleteObjectsByIds(Integer[] ids) {
 		Assert.noNullElement(ids, "请至少选择一个商品");

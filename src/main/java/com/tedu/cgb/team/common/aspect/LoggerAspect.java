@@ -52,7 +52,6 @@ public class LoggerAspect {
 	 * @throws Throwable
 	 */
 	@Around("logPointcut()")
-	@Async
 	public Object aroundAdvice(ProceedingJoinPoint jp) 
 			throws Throwable {
 		long start = System.currentTimeMillis();
@@ -63,6 +62,7 @@ public class LoggerAspect {
 		return result;
 	}
 	
+	@Async
 	private void insertLogger(ProceedingJoinPoint jp, long time) 
 			throws Throwable {
 		Logger logger = getReflectDataIntoObject(jp, time);
