@@ -27,7 +27,7 @@ public class SpringShiroConfiguration {
 	
 	@Bean
 	public ShiroFilterFactoryBean shiroFilterFactoryBean(
-			@Autowired SecurityManager securityManager) {
+			SecurityManager securityManager) {
 		// 构建bean对象，通过此对象创建过滤器工厂
 		ShiroFilterFactoryBean factoryBean = 
 				new ShiroFilterFactoryBean();
@@ -117,10 +117,10 @@ public class SpringShiroConfiguration {
 	 */
 	@Bean
 	public SecurityManager securityManager(
-			@Autowired Realm realm,
-			@Autowired CacheManager cacheManager,
-			@Autowired SessionManager sessionManager,
-			@Autowired RememberMeManager rememberMeManager) {
+		  Realm realm,
+		  CacheManager cacheManager,
+		  SessionManager sessionManager,
+		  RememberMeManager rememberMeManager) {
 		DefaultWebSecurityManager securityManager = 
 				new DefaultWebSecurityManager();
 		securityManager.setRealm(realm);
